@@ -141,7 +141,7 @@ export function HomeView({ locale }: { locale: Locale }) {
 
         <div className="mt-10 space-y-4">
           <TrustBanner locale={locale} />
-          <OfflineNotice message={t.offlineNotice} />
+          <OfflineNotice locale={locale} />
         </div>
       </main>
       <SiteFooter locale={locale} />

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+    <rect width="512" height="512" fill="#059669"/>
+    <g transform="translate(22 22)">
+      <path d="M 234 37.44
+               L 56.16 102.96
+               L 56.16 257.40000000000003
+               C 56.16 365.04, 149.76 430.56, 234 449.28
+               C 318.24 430.56, 411.84 365.04, 411.84 257.40000000000003
+               L 411.84 102.96 Z"
+            fill="#fdfaf3" stroke="#fdfaf3" stroke-width="0"/>
+      <text x="234" y="290.16" text-anchor="middle"
+            font-family="Helvetica, Arial, sans-serif" font-weight="900"
+            font-size="197" fill="#059669">TD</text>
+    </g>
+  </svg>
