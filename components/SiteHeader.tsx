@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { Shield } from "lucide-react";
 import { LanguageToggle } from "./LanguageToggle";
+import { dict, type Locale } from "@/lib/i18n";
 
-export function SiteHeader({ locale }: { locale: "en" | "es" }) {
+export function SiteHeader({ locale }: { locale: Locale }) {
+  const t = dict[locale];
   const home = locale === "es" ? "/es" : "/";
+  const donateHref = locale === "es" ? "/es/donate" : "/donate";
   return (
     <header className="sticky top-0 z-30 border-b border-zinc-200 bg-[#fdfaf3]/85 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
@@ -18,10 +21,10 @@ export function SiteHeader({ locale }: { locale: "en" | "es" }) {
         </Link>
         <div className="flex items-center gap-2">
           <Link
-            href="/donate"
+            href={donateHref}
             className="rounded-full bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700"
           >
-            {locale === "es" ? "Donar" : "Donate"}
+            {t.donate}
           </Link>
           <LanguageToggle />
         </div>

@@ -6,6 +6,7 @@ import type { EmergencyGuide } from "@/lib/content";
 import { pick } from "@/lib/content";
 import { StepFlow } from "./StepFlow";
 import { TrustBanner } from "./TrustBanner";
+import { SourcesList } from "./SourcesList";
 import { QuickExitButton } from "./QuickExitButton";
 import { LanguageToggle } from "./LanguageToggle";
 import { AudioButton } from "./AudioButton";
@@ -19,17 +20,20 @@ export function EmergencyGuideView({
   locale: Locale;
 }) {
   const t = dict[locale];
+  const emergencyHref = locale === "es" ? "/es/emergency" : "/emergency";
+  const resourcesHref = locale === "es" ? "/es/resources" : "/resources";
+
   return (
     <>
       <QuickExitButton label={t.quickExit} />
       <div className="bg-red-700 text-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
           <Link
-            href="/emergency"
+            href={emergencyHref}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
-            {locale === "es" ? "Emergencia" : "Emergency"}
+            {t.backEmergency}
           </Link>
           <div className="flex items-center gap-2">
             <AudioButton label={t.listen} />
@@ -80,20 +84,19 @@ export function EmergencyGuideView({
         </div>
 
         <div className="mt-8">
-          <TrustBanner
-            message={t.legalNotice}
-            reviewLabel={t.attorneyReviewed}
-          />
+          <TrustBanner locale={locale} review={guide} />
+        </div>
+
+        <div className="mt-6">
+          <SourcesList locale={locale} sources={guide.sourceLinks} />
         </div>
 
         <div className="mt-6 text-sm">
           <Link
-            href="/resources"
+            href={resourcesHref}
             className="font-semibold text-emerald-700 hover:underline"
           >
-            {locale === "es"
-              ? "→ Ver recursos cerca de ti"
-              : "→ See resources near you"}
+            {t.seeResourcesNearby}
           </Link>
         </div>
       </main>

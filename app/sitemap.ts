@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 
-const routes = [
+const enRoutes = [
   "/",
-  "/es",
   "/emergency",
   "/emergency/ice-at-door",
   "/emergency/police-stop",
@@ -21,12 +20,14 @@ const routes = [
   "/disclaimer",
 ];
 
+const esRoutes = enRoutes.map((p) => (p === "/" ? "/es" : `/es${p}`));
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return routes.map((path) => ({
+  return [...enRoutes, ...esRoutes].map((path) => ({
     url: `https://tengoderechos.org${path}`,
     lastModified: now,
     changeFrequency: "monthly",
-    priority: path === "/" ? 1 : 0.6,
+    priority: path === "/" || path === "/es" ? 1 : 0.6,
   }));
 }

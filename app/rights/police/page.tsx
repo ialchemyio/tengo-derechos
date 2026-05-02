@@ -1,20 +1,12 @@
+import { notFound } from "next/navigation";
 import { RightsTopicView } from "@/components/RightsTopicView";
+import { getRightsTopic } from "@/lib/rights";
 
-export const metadata = { title: "Rights — Police" };
+const topic = getRightsTopic("police");
+
+export const metadata = { title: topic ? topic.title.en : "Rights" };
 
 export default function Page() {
-  return (
-    <RightsTopicView
-      title="Police — basics"
-      intro="In many situations you may have these protections. Always stay calm and never run."
-      bullets={[
-        "You may have the right to remain silent in many encounters.",
-        "If driving, you generally must show license, registration, and insurance.",
-        "You may say you do not consent to a search. Do not physically resist.",
-        "Ask: 'Officer, am I free to go?' If yes, calmly leave.",
-        "Do not lie or give false documents.",
-        "If arrested, ask for a lawyer.",
-      ]}
-    />
-  );
+  if (!topic) notFound();
+  return <RightsTopicView topic={topic} locale="en" />;
 }

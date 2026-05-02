@@ -9,8 +9,7 @@ import {
   Heart,
   ShieldAlert,
 } from "lucide-react";
-import type { Locale } from "@/lib/i18n";
-import { dict } from "@/lib/i18n";
+import { dict, type Locale } from "@/lib/i18n";
 import { EmergencyButton } from "./EmergencyButton";
 import { TrustBanner } from "./TrustBanner";
 import { OfflineNotice } from "./OfflineNotice";
@@ -19,6 +18,7 @@ import { SiteFooter } from "./SiteFooter";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const t = dict[locale];
+  const p = (path: string) => (locale === "es" ? `/es${path}` : path);
   return (
     <>
       <SiteHeader locale={locale} />
@@ -33,14 +33,14 @@ export function HomeView({ locale }: { locale: Locale }) {
           <p className="mt-3 max-w-2xl text-lg text-zinc-700">{t.heroSub}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/emergency"
+              href={p("/emergency")}
               className="inline-flex items-center gap-2 rounded-2xl bg-red-600 px-5 py-3 text-base font-bold text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300"
             >
               <ShieldAlert className="h-5 w-5" aria-hidden />
               {t.needHelp}
             </Link>
             <Link
-              href="/resources"
+              href={p("/resources")}
               className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-base font-bold text-zinc-900 shadow-sm ring-1 ring-zinc-300 hover:bg-zinc-50"
             >
               {t.resources}
@@ -49,47 +49,45 @@ export function HomeView({ locale }: { locale: Locale }) {
         </section>
 
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-bold text-zinc-900">
-            {locale === "es" ? "¿Qué está pasando?" : "What's happening?"}
-          </h2>
+          <h2 className="mb-3 text-xl font-bold text-zinc-900">{t.whatHappening}</h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <EmergencyButton
-              href="/emergency/ice-at-door"
+              href={p("/emergency/ice-at-door")}
               title={t.iceAtDoor}
               subtitle={locale === "es" ? "Tocan la puerta" : "Knock at door"}
               icon={DoorClosed}
               tone="red"
             />
             <EmergencyButton
-              href="/emergency/police-stop"
+              href={p("/emergency/police-stop")}
               title={t.policeStop}
               subtitle={locale === "es" ? "Tránsito" : "Traffic"}
               icon={Car}
               tone="amber"
             />
             <EmergencyButton
-              href="/emergency/border-patrol"
+              href={p("/emergency/border-patrol")}
               title={t.borderPatrol}
               subtitle={locale === "es" ? "Encuentro" : "Encounter"}
               icon={ShieldAlert}
               tone="indigo"
             />
             <EmergencyButton
-              href="/emergency/medical"
+              href={p("/emergency/medical")}
               title={t.medical}
               subtitle={locale === "es" ? "Sin seguro" : "No insurance"}
               icon={Stethoscope}
               tone="teal"
             />
             <EmergencyButton
-              href="/lawyers"
+              href={p("/lawyers")}
               title={t.findLawyer}
               subtitle={locale === "es" ? "Ayuda legal" : "Legal help"}
               icon={Scale}
               tone="emerald"
             />
             <EmergencyButton
-              href="/resources"
+              href={p("/resources")}
               title={t.resources}
               subtitle={locale === "es" ? "Cerca de ti" : "Near you"}
               icon={Users}
@@ -114,29 +112,27 @@ export function HomeView({ locale }: { locale: Locale }) {
 
         <section className="mt-8 grid gap-4 sm:grid-cols-2">
           <Link
-            href="/donate"
+            href={p("/donate")}
             className="flex items-center justify-between gap-4 rounded-2xl bg-emerald-600 p-5 text-white shadow-sm hover:bg-emerald-700"
           >
             <div>
               <div className="text-lg font-bold">{t.donate}</div>
               <div className="text-sm opacity-90">
                 {locale === "es"
-                  ? "Apoya a las familias en crisis"
+                  ? "Apoya a las familias en momentos difíciles"
                   : "Support families in crisis"}
               </div>
             </div>
             <Heart className="h-8 w-8" aria-hidden />
           </Link>
           <Link
-            href="/rights"
+            href={p("/rights")}
             className="flex items-center justify-between gap-4 rounded-2xl bg-white p-5 ring-1 ring-zinc-200 hover:ring-zinc-400"
           >
             <div>
               <div className="text-lg font-bold text-zinc-900">{t.rights}</div>
               <div className="text-sm text-zinc-600">
-                {locale === "es"
-                  ? "Aprende lo básico"
-                  : "Learn the basics"}
+                {locale === "es" ? "Aprende lo básico" : "Learn the basics"}
               </div>
             </div>
             <AlertTriangle className="h-8 w-8 text-emerald-600" aria-hidden />
@@ -144,10 +140,7 @@ export function HomeView({ locale }: { locale: Locale }) {
         </section>
 
         <div className="mt-10 space-y-4">
-          <TrustBanner
-            message={t.legalNotice}
-            reviewLabel={t.attorneyReviewed}
-          />
+          <TrustBanner locale={locale} />
           <OfflineNotice message={t.offlineNotice} />
         </div>
       </main>
