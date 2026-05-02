@@ -1,5 +1,5 @@
 import { HomeView } from "@/components/HomeView";
 
 export default function Page() {
-  return <HomeView locale="en" />;
+  return <HomeView locale="es" />;
 }
