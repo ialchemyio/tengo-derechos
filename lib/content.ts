@@ -14,6 +14,10 @@ export type ReviewMeta = {
   reviewedDate?: string; // ISO yyyy-mm-dd
   sourceLinks?: SourceLink[];
   lastUpdated: string; // ISO yyyy-mm-dd
+  // True only after the audio recordings (TTS or human) for the matching
+  // language have been verified by the same attorney that approved the
+  // text. Defaults to false.
+  audioReviewed?: boolean;
 };
 
 export type Step = {

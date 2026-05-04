@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import pkg from "@/package.json" with { type: "json" };
+import { allClipUrls, isAudioPwaCachingEnabled } from "@/lib/audio";
 
 export const dynamic = "force-static";
 
@@ -25,7 +26,7 @@ const PRECACHE_ROUTES = [
   "/es/about/offline",
 ];
 
-const PRECACHE_ASSETS = [
+const STATIC_ASSETS = [
   "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -33,6 +34,10 @@ const PRECACHE_ASSETS = [
   "/icons/apple-touch-icon.png",
   "/icons/icon.svg",
 ];
+
+const PRECACHE_ASSETS = isAudioPwaCachingEnabled()
+  ? [...STATIC_ASSETS, ...allClipUrls()]
+  : STATIC_ASSETS;
 
 const VERSION =
   process.env.NEXT_PUBLIC_BUILD_ID ||
@@ -54,6 +59,7 @@ const CACHE_FIRST_PREFIXES = [
   "/emergency/",
   "/es/emergency/",
   "/icons/",
+  "/audio/",
   "/_next/static/",
   "/manifest.json",
   "/weather",

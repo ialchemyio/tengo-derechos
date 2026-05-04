@@ -9,7 +9,6 @@ import { TrustBanner } from "./TrustBanner";
 import { SourcesList } from "./SourcesList";
 import { QuickExitButton } from "./QuickExitButton";
 import { LanguageToggle } from "./LanguageToggle";
-import { AudioButton } from "./AudioButton";
 import { PrintButton } from "./PrintButton";
 
 export function EmergencyGuideView({
@@ -36,7 +35,6 @@ export function EmergencyGuideView({
             {t.backEmergency}
           </Link>
           <div className="flex items-center gap-2">
-            <AudioButton label={t.listen} />
             <LanguageToggle />
           </div>
         </div>
@@ -61,6 +59,7 @@ export function EmergencyGuideView({
           steps={guide.steps}
           locale={locale}
           labels={{ say: t.sayThis, doNot: t.doNotDo, listen: t.listen }}
+          guideSlug={guide.slug}
         />
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">

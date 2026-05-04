@@ -10,6 +10,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
+import { hasAudioForGuide } from "@/lib/audio";
 import { EmergencyButton } from "./EmergencyButton";
 import { TrustBanner } from "./TrustBanner";
 import { OfflineNotice } from "./OfflineNotice";
@@ -19,6 +20,7 @@ import { SiteFooter } from "./SiteFooter";
 export function HomeView({ locale }: { locale: Locale }) {
   const t = dict[locale];
   const p = (path: string) => (locale === "es" ? `/es${path}` : path);
+  const audioLabel = locale === "es" ? "Audio" : "Audio";
   return (
     <>
       <SiteHeader locale={locale} />
@@ -57,6 +59,8 @@ export function HomeView({ locale }: { locale: Locale }) {
               subtitle={locale === "es" ? "Tocan la puerta" : "Knock at door"}
               icon={DoorClosed}
               tone="red"
+              hasAudio={hasAudioForGuide("ice-at-door", locale)}
+              audioLabel={audioLabel}
             />
             <EmergencyButton
               href={p("/emergency/police-stop")}
@@ -64,6 +68,8 @@ export function HomeView({ locale }: { locale: Locale }) {
               subtitle={locale === "es" ? "Tránsito" : "Traffic"}
               icon={Car}
               tone="amber"
+              hasAudio={hasAudioForGuide("police-stop", locale)}
+              audioLabel={audioLabel}
             />
             <EmergencyButton
               href={p("/emergency/border-patrol")}
@@ -71,6 +77,8 @@ export function HomeView({ locale }: { locale: Locale }) {
               subtitle={locale === "es" ? "Encuentro" : "Encounter"}
               icon={ShieldAlert}
               tone="indigo"
+              hasAudio={hasAudioForGuide("border-patrol", locale)}
+              audioLabel={audioLabel}
             />
             <EmergencyButton
               href={p("/emergency/medical")}
@@ -78,6 +86,8 @@ export function HomeView({ locale }: { locale: Locale }) {
               subtitle={locale === "es" ? "Sin seguro" : "No insurance"}
               icon={Stethoscope}
               tone="teal"
+              hasAudio={hasAudioForGuide("medical", locale)}
+              audioLabel={audioLabel}
             />
             <EmergencyButton
               href={p("/lawyers")}

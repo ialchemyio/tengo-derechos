@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-05-04T03:44:34.653Z",
+  "source": "macos-say",
+  "steps": {
+    "ice-at-door:2": {
+      "en": {
+        "url": "/audio/ice-at-door/2-en.mp3",
+        "durationMs": 1829,
+        "bytes": 14836,
+        "voice": "Samantha",
+        "transcript": "Please slide the warrant under the door."
+      },
+      "es": {
+        "url": "/audio/ice-at-door/2-es.mp3",
+        "durationMs": 3004,
+        "bytes": 24240,
+        "voice": "Paulina",
+        "transcript": "Por favor deslice la orden por debajo de la puerta."
+      }
+    },
+    "ice-at-door:3": {
+      "en": {
+        "url": "/audio/ice-at-door/3-en.mp3",
+        "durationMs": 1593,
+        "bytes": 12955,
+        "voice": "Samantha",
+        "transcript": "I choose to remain silent."
+      },
+      "es": {
+        "url": "/audio/ice-at-door/3-es.mp3",
+        "durationMs": 2090,
+        "bytes": 16926,
+        "voice": "Paulina",
+        "transcript": "Decido permanecer en silencio."
+      }
+    },
+    "police-stop:3": {
+      "en": {
+        "url": "/audio/police-stop/3-en.mp3",
+        "durationMs": 1959,
+        "bytes": 15881,
+        "voice": "Samantha",
+        "transcript": "Officer, am I free to go?"
+      },
+      "es": {
+        "url": "/audio/police-stop/3-es.mp3",
+        "durationMs": 2116,
+        "bytes": 17135,
+        "voice": "Paulina",
+        "transcript": "Oficial, ¿soy libre de irme?"
+      }
+    },
+    "police-stop:4": {
+      "en": {
+        "url": "/audio/police-stop/4-en.mp3",
+        "durationMs": 1593,
+        "bytes": 12955,
+        "voice": "Samantha",
+        "transcript": "I choose to remain silent."
+      },
+      "es": {
+        "url": "/audio/police-stop/4-es.mp3",
+        "durationMs": 2090,
+        "bytes": 16926,
+        "voice": "Paulina",
+        "transcript": "Decido permanecer en silencio."
+      }
+    },
+    "police-stop:5": {
+      "en": {
+        "url": "/audio/police-stop/5-en.mp3",
+        "durationMs": 1802,
+        "bytes": 14627,
+        "voice": "Samantha",
+        "transcript": "I do not consent to a search."
+      },
+      "es": {
+        "url": "/audio/police-stop/5-es.mp3",
+        "durationMs": 1724,
+        "bytes": 14000,
+        "voice": "Paulina",
+        "transcript": "No consiento al registro."
+      }
+    },
+    "border-patrol:1": {
+      "en": {
+        "url": "/audio/border-patrol/1-en.mp3",
+        "durationMs": 1149,
+        "bytes": 9403,
+        "voice": "Samantha",
+        "transcript": "Am I free to leave?"
+      },
+      "es": {
+        "url": "/audio/border-patrol/1-es.mp3",
+        "durationMs": 1254,
+        "bytes": 10239,
+        "voice": "Paulina",
+        "transcript": "¿Soy libre de irme?"
+      }
+    },
+    "border-patrol:2": {
+      "en": {
+        "url": "/audio/border-patrol/2-en.mp3",
+        "durationMs": 1593,
+        "bytes": 12955,
+        "voice": "Samantha",
+        "transcript": "I choose to remain silent."
+      },
+      "es": {
+        "url": "/audio/border-patrol/2-es.mp3",
+        "durationMs": 2090,
+        "bytes": 16926,
+        "voice": "Paulina",
+        "transcript": "Decido permanecer en silencio."
+      }
+    },
+    "border-patrol:4": {
+      "en": {
+        "url": "/audio/border-patrol/4-en.mp3",
+        "durationMs": 1515,
+        "bytes": 12328,
+        "voice": "Samantha",
+        "transcript": "I want to speak to a lawyer."
+      },
+      "es": {
+        "url": "/audio/border-patrol/4-es.mp3",
+        "durationMs": 1672,
+        "bytes": 13582,
+        "voice": "Paulina",
+        "transcript": "Quiero hablar con un abogado."
+      }
+    },
+    "medical:2": {
+      "en": {
+        "url": "/audio/medical/2-en.mp3",
+        "durationMs": 2926,
+        "bytes": 23613,
+        "voice": "Samantha",
+        "transcript": "Do you offer financial assistance or charity care?"
+      },
+      "es": {
+        "url": "/audio/medical/2-es.mp3",
+        "durationMs": 3318,
+        "bytes": 26748,
+        "voice": "Paulina",
+        "transcript": "¿Ofrecen asistencia financiera o ayuda económica?"
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ const enRoutes = [
   "/about",
   "/about/offline",
   "/about/transparency",
+  "/about/audio",
   "/disclaimer",
 ];
 

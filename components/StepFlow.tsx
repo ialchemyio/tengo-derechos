@@ -1,16 +1,19 @@
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { pick, type Step } from "@/lib/content";
+import { getStepClip } from "@/lib/audio";
 import { RightsScriptBox } from "./RightsScriptBox";
 
 export function StepFlow({
   steps,
   locale,
   labels,
+  guideSlug,
 }: {
   steps: Step[];
   locale: Locale;
   labels: { say: string; doNot: string; listen: string };
+  guideSlug?: string;
 }) {
   return (
     <ol className="space-y-4">
@@ -37,6 +40,10 @@ export function StepFlow({
                     title={labels.say}
                     phrase={pick(locale, step.say)}
                     listenLabel={labels.listen}
+                    clip={
+                      guideSlug ? getStepClip(guideSlug, i, locale) : null
+                    }
+                    locale={locale}
                   />
                 </div>
               ) : null}

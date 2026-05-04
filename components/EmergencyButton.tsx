@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type LucideIcon } from "lucide-react";
+import { type LucideIcon, Headphones } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Tone = "red" | "amber" | "teal" | "indigo" | "emerald" | "neutral";
@@ -19,12 +19,16 @@ export function EmergencyButton({
   subtitle,
   icon: Icon,
   tone = "red",
+  hasAudio,
+  audioLabel,
 }: {
   href: string;
   title: string;
   subtitle?: string;
   icon: LucideIcon;
   tone?: Tone;
+  hasAudio?: boolean;
+  audioLabel?: string;
 }) {
   return (
     <Link
@@ -34,7 +38,15 @@ export function EmergencyButton({
         toneClasses[tone]
       )}
     >
-      <Icon className="h-8 w-8 opacity-90 transition group-hover:scale-110" aria-hidden />
+      <div className="flex items-start justify-between">
+        <Icon className="h-8 w-8 opacity-90 transition group-hover:scale-110" aria-hidden />
+        {hasAudio ? (
+          <span className="inline-flex items-center gap-1 rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+            <Headphones className="h-3 w-3" aria-hidden />
+            {audioLabel ?? "Audio"}
+          </span>
+        ) : null}
+      </div>
       <div>
         <div className="text-lg font-bold leading-tight">{title}</div>
         {subtitle ? (
