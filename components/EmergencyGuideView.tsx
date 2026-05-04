@@ -4,14 +4,16 @@ import type { Locale } from "@/lib/i18n";
 import { dict } from "@/lib/i18n";
 import type { EmergencyGuide } from "@/lib/content";
 import { pick } from "@/lib/content";
+import { getEffectiveReview } from "@/lib/attestations";
 import { StepFlow } from "./StepFlow";
 import { TrustBanner } from "./TrustBanner";
 import { SourcesList } from "./SourcesList";
 import { QuickExitButton } from "./QuickExitButton";
 import { LanguageToggle } from "./LanguageToggle";
 import { PrintButton } from "./PrintButton";
+import { ReviewBadge } from "./ReviewBadge";
 
-export function EmergencyGuideView({
+export async function EmergencyGuideView({
   guide,
   locale,
 }: {
@@ -19,6 +21,7 @@ export function EmergencyGuideView({
   locale: Locale;
 }) {
   const t = dict[locale];
+  const review = await getEffectiveReview(guide.slug, guide);
   const emergencyHref = locale === "es" ? "/es/emergency" : "/emergency";
   const resourcesHref = locale === "es" ? "/es/resources" : "/resources";
 
@@ -42,9 +45,12 @@ export function EmergencyGuideView({
           <div className="flex items-start gap-3">
             <ShieldAlert className="mt-1 h-7 w-7 shrink-0" aria-hidden />
             <div>
-              <h1 className="text-3xl font-extrabold leading-tight sm:text-4xl">
-                {pick(locale, guide.title)}
-              </h1>
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+                  {pick(locale, guide.title)}
+                </h1>
+                <ReviewBadge reviewed={review.reviewed} locale={locale} />
+              </div>
               <p className="mt-2 max-w-2xl text-base text-white/90">
                 {pick(locale, guide.intro)}
               </p>
@@ -83,7 +89,7 @@ export function EmergencyGuideView({
         </div>
 
         <div className="mt-8">
-          <TrustBanner locale={locale} review={guide} />
+          <TrustBanner locale={locale} review={review} />
         </div>
 
         <div className="mt-6">

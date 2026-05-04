@@ -3,10 +3,12 @@ import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { TrustBanner } from "./TrustBanner";
 import { SourcesList } from "./SourcesList";
+import { ReviewBadge } from "./ReviewBadge";
 import { dict, type Locale } from "@/lib/i18n";
 import type { RightsTopic } from "@/lib/rights";
+import { getEffectiveReview } from "@/lib/attestations";
 
-export function RightsTopicView({
+export async function RightsTopicView({
   topic,
   locale,
 }: {
@@ -15,6 +17,7 @@ export function RightsTopicView({
 }) {
   const t = dict[locale];
   const rightsHref = locale === "es" ? "/es/rights" : "/rights";
+  const review = await getEffectiveReview(topic.slug, topic);
   return (
     <>
       <SiteHeader locale={locale} />
@@ -27,9 +30,12 @@ export function RightsTopicView({
             ← {t.backRights}
           </Link>
         </p>
-        <h1 className="mt-2 text-3xl font-extrabold text-zinc-900 sm:text-4xl">
-          {topic.title[locale]}
-        </h1>
+        <div className="mt-2 flex flex-wrap items-center gap-2">
+          <h1 className="text-3xl font-extrabold text-zinc-900 sm:text-4xl">
+            {topic.title[locale]}
+          </h1>
+          <ReviewBadge reviewed={review.reviewed} locale={locale} />
+        </div>
         <p className="mt-2 text-zinc-700">{topic.intro[locale]}</p>
         <ul className="mt-6 list-inside list-disc space-y-2 rounded-2xl bg-white p-5 text-zinc-800 ring-1 ring-zinc-200">
           {topic.bullets[locale].map((b, i) => (
@@ -37,7 +43,7 @@ export function RightsTopicView({
           ))}
         </ul>
         <div className="mt-8">
-          <TrustBanner locale={locale} review={topic} />
+          <TrustBanner locale={locale} review={review} />
         </div>
         <div className="mt-6">
           <SourcesList locale={locale} sources={topic.sourceLinks} />

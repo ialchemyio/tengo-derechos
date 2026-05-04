@@ -36,6 +36,7 @@ yarn-error.log*
 
 # donations runtime log (writable at runtime)
 /data/
+!data/*.example.json
 
 # vercel
 .vercel

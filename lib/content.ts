@@ -9,9 +9,12 @@ export type SourceLink = {
 
 export type ReviewMeta = {
   reviewed: boolean;
+  reviewerId?: string;
   reviewedBy?: string;
   reviewerTitle?: string;
   reviewedDate?: string; // ISO yyyy-mm-dd
+  scope?: "full" | "partial";
+  notes?: string;
   sourceLinks?: SourceLink[];
   lastUpdated: string; // ISO yyyy-mm-dd
   // True only after the audio recordings (TTS or human) for the matching

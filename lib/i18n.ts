@@ -147,6 +147,16 @@ export const dict = {
     pendingBadge: "Pending review",
     offlineSubmitWarning:
       "You appear to be offline. Submissions need an internet connection.",
+    verified: "Verified",
+    unverified: "Unverified",
+    licensedIn: "Licensed in",
+    lastReviewed: "Last reviewed",
+    versionLabel: "Version",
+    notYetVerified:
+      "This page has not yet been verified by a licensed attorney or nonprofit professional.",
+    educationalOnly: "Educational information only. Not legal advice.",
+    sourceDomain: "Source",
+    reviewedAt: "at",
   },
   es: {
     brand: "Tengo Derechos",
@@ -294,6 +304,17 @@ export const dict = {
     pendingBadge: "En revisión",
     offlineSubmitWarning:
       "Parece que estás sin conexión. Las propuestas necesitan internet.",
+    verified: "Verificado",
+    unverified: "No verificado",
+    licensedIn: "Licenciado en",
+    lastReviewed: "Última revisión",
+    versionLabel: "Versión",
+    notYetVerified:
+      "Esta página aún no ha sido verificada por un abogado con licencia o profesional de una organización.",
+    educationalOnly:
+      "Información educativa únicamente. No es asesoramiento legal.",
+    sourceDomain: "Fuente",
+    reviewedAt: "en",
   },
 } as const;
 
