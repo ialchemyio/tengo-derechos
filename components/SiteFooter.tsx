@@ -42,9 +42,24 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             </Link>
           </nav>
         </div>
-        <p className="mt-8 border-t border-white/10 pt-6 text-xs text-[#a8b3cb]">
-          © {new Date().getFullYear()} Tengo Derechos · {dict.es.tagline}
-        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#a8b3cb]">
+          <p>© {new Date().getFullYear()} Tengo Derechos · {dict.es.tagline}</p>
+          <a
+            href="https://beyondamedium.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-[11px] font-medium text-[#cdd5e8] ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+          >
+            {locale === "es" ? "Impulsado por" : "Powered by"}{" "}
+            <span className="font-semibold text-white">Beyond A Medium</span>{" "}
+            <span className="hidden sm:inline opacity-70">
+              —{" "}
+              {locale === "es"
+                ? "Herramientas de IA para organizaciones y creadores"
+                : "AI tools for organizations & creators"}
+            </span>
+          </a>
+        </div>
       </div>
     </footer>
   );
