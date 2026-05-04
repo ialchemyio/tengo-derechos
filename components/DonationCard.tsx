@@ -1,24 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import { Heart } from "lucide-react";
-import { donationAmounts, impactCopy, startCheckout } from "@/lib/donations";
-import type { Locale } from "@/lib/i18n";
+import { Heart, Loader2 } from "lucide-react";
+import {
+  donationAmounts,
+  impactCopy,
+  startCheckout,
+  MIN_CENTS,
+  MAX_CENTS,
+} from "@/lib/donations";
+import { dict, type Locale } from "@/lib/i18n";
 
 export function DonationCard({ locale }: { locale: Locale }) {
+  const t = dict[locale];
   const [amount, setAmount] = useState<number>(25);
   const [custom, setCustom] = useState<string>("");
   const [monthly, setMonthly] = useState(false);
+  const [pending, setPending] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
   async function donate() {
-    const value = custom ? Number(custom) : amount;
-    if (!value || value < 1) {
-      setMsg(locale === "es" ? "Ingresa un monto válido." : "Enter a valid amount.");
+    setMsg(null);
+    const dollars = custom ? Number(custom) : amount;
+    const cents = Math.round(dollars * 100);
+    if (
+      !Number.isFinite(cents) ||
+      cents < MIN_CENTS ||
+      cents > MAX_CENTS
+    ) {
+      setMsg(t.donateAmountInvalid);
       return;
     }
-    const res = await startCheckout({ amount: value, monthly });
-    setMsg(res.message);
+
+    setPending(true);
+    const res = await startCheckout({ amountCents: cents, monthly, locale });
+    if (res.ok) {
+      window.location.href = res.url;
+      return;
+    }
+    setPending(false);
+    if (res.status === 503) {
+      setMsg(res.message || t.donateStripeUnconfigured);
+    } else if (res.status === 400) {
+      setMsg(res.message || t.donateAmountInvalid);
+    } else {
+      setMsg(res.message || t.donateFailed);
+    }
   }
 
   const impact =
@@ -44,7 +71,8 @@ export function DonationCard({ locale }: { locale: Locale }) {
               setAmount(a);
               setCustom("");
             }}
-            className={`rounded-xl border px-3 py-3 text-base font-bold transition focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            disabled={pending}
+            className={`rounded-xl border px-3 py-3 text-base font-bold transition focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 ${
               amount === a && !custom
                 ? "border-emerald-600 bg-emerald-50 text-emerald-900"
                 : "border-zinc-200 bg-white text-zinc-800 hover:border-zinc-400"
@@ -64,9 +92,12 @@ export function DonationCard({ locale }: { locale: Locale }) {
           type="number"
           inputMode="decimal"
           min={1}
+          max={5000}
+          step="0.01"
           value={custom}
           onChange={(e) => setCustom(e.target.value)}
-          className="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          disabled={pending}
+          className="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
           placeholder="$"
         />
       </label>
@@ -76,6 +107,7 @@ export function DonationCard({ locale }: { locale: Locale }) {
           type="checkbox"
           checked={monthly}
           onChange={(e) => setMonthly(e.target.checked)}
+          disabled={pending}
           className="h-4 w-4 rounded border-zinc-300"
         />
         {locale === "es" ? "Hacer donación mensual" : "Make this a monthly gift"}
@@ -87,22 +119,24 @@ export function DonationCard({ locale }: { locale: Locale }) {
 
       <button
         onClick={donate}
-        className="mt-4 w-full rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+        disabled={pending}
+        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300 disabled:opacity-70"
       >
-        {locale === "es" ? "Donar ahora" : "Donate now"}
+        {pending ? (
+          <>
+            <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
+            {t.donateProcessing}
+          </>
+        ) : (
+          <>{locale === "es" ? "Donar ahora" : "Donate now"}</>
+        )}
       </button>
 
       {msg ? (
-        <p className="mt-3 text-sm text-zinc-600" role="status">
+        <p className="mt-3 text-sm text-zinc-700" role="status">
           {msg}
         </p>
       ) : null}
-
-      <p className="mt-3 text-xs text-zinc-500">
-        {locale === "es"
-          ? "Las donaciones se procesarán de forma segura cuando se conecte Stripe."
-          : "Donations will process securely once Stripe is connected."}
-      </p>
     </div>
   );
 }

@@ -1,11 +1,15 @@
+import Link from "next/link";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { DonationCard } from "./DonationCard";
 import { TrustBanner } from "./TrustBanner";
+import { NonprofitStatusBanner } from "./NonprofitStatusBanner";
 import { dict, type Locale } from "@/lib/i18n";
 
 export function DonateView({ locale }: { locale: Locale }) {
   const t = dict[locale];
+  const transparencyHref =
+    locale === "es" ? "/es/about/transparency" : "/about/transparency";
   return (
     <>
       <SiteHeader locale={locale} />
@@ -14,6 +18,10 @@ export function DonateView({ locale }: { locale: Locale }) {
           {t.donateTitle}
         </h1>
         <p className="mt-2 text-zinc-700">{t.donateIntro}</p>
+
+        <div className="mt-4">
+          <NonprofitStatusBanner locale={locale} />
+        </div>
 
         <div className="mt-6">
           <DonationCard locale={locale} />
@@ -27,13 +35,18 @@ export function DonateView({ locale }: { locale: Locale }) {
             <li>• {t.donateImpact3}</li>
             <li>• {t.donateImpact4}</li>
           </ul>
+          <p className="mt-4 text-sm">
+            <Link
+              href={transparencyHref}
+              className="font-semibold text-emerald-700 hover:underline"
+            >
+              {t.transparencyTitle} →
+            </Link>
+          </p>
         </section>
 
         <div className="mt-8">
           <TrustBanner locale={locale} />
-          <p className="mt-3 rounded-2xl bg-amber-50 p-4 text-sm text-amber-950 ring-1 ring-amber-200">
-            <strong>{t.donateReviewLabel}.</strong> {t.donateNonprofitNote}
-          </p>
         </div>
       </main>
       <SiteFooter locale={locale} />

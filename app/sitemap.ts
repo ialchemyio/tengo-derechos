@@ -18,6 +18,7 @@ const enRoutes = [
   "/donate",
   "/about",
   "/about/offline",
+  "/about/transparency",
   "/disclaimer",
 ];
 

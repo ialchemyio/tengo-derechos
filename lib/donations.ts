@@ -1,4 +1,10 @@
+import type { Locale } from "./i18n";
+
 export const donationAmounts = [5, 10, 25, 50, 100] as const;
+
+export const PRESET_CENTS = donationAmounts.map((d) => d * 100);
+export const MIN_CENTS = 100;
+export const MAX_CENTS = 500_000;
 
 export const impactCopy: Record<number, { en: string; es: string }> = {
   5: {
@@ -27,25 +33,58 @@ export function isStripeConfigured(): boolean {
   return Boolean(process.env.STRIPE_SECRET_KEY);
 }
 
+export type NonprofitStatus = "pending" | "confirmed" | "denied";
+
+export function getNonprofitStatus(): NonprofitStatus {
+  const v = (process.env.NEXT_PUBLIC_NONPROFIT_STATUS || "pending").toLowerCase();
+  if (v === "confirmed" || v === "denied") return v;
+  return "pending";
+}
+
+export function getEin(): string | null {
+  return process.env.NEXT_PUBLIC_NONPROFIT_EIN || null;
+}
+
+export function validateAmountCents(cents: number): boolean {
+  return Number.isFinite(cents) && cents >= MIN_CENTS && cents <= MAX_CENTS;
+}
+
 export type DonationIntent = {
-  amount: number;
+  amountCents: number;
   monthly: boolean;
+  locale: Locale;
 };
 
-export async function startCheckout(intent: DonationIntent): Promise<{
-  ok: boolean;
-  url?: string;
-  message: string;
-}> {
-  if (!isStripeConfigured()) {
+export type CheckoutResult =
+  | { ok: true; url: string }
+  | { ok: false; status: number; message: string };
+
+export async function startCheckout(
+  intent: DonationIntent
+): Promise<CheckoutResult> {
+  try {
+    const res = await fetch("/api/donations/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: intent.amountCents,
+        monthly: intent.monthly,
+        locale: intent.locale,
+      }),
+    });
+    const data = (await res.json().catch(() => ({}))) as {
+      url?: string;
+      message?: string;
+    };
+    if (res.ok && data.url) {
+      return { ok: true, url: data.url };
+    }
     return {
       ok: false,
-      message:
-        "Stripe is not yet configured. Your generosity is noted — please check back soon.",
+      status: res.status,
+      message: data.message || "Could not start checkout.",
     };
+  } catch {
+    return { ok: false, status: 0, message: "Network error." };
   }
-  return {
-    ok: false,
-    message: `Checkout for $${intent.amount}${intent.monthly ? "/mo" : ""} not yet wired. Please email donations@tengoderechos.org.`,
-  };
 }
