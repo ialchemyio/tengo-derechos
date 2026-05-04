@@ -2,19 +2,26 @@ import Link from "next/link";
 import { Heart } from "lucide-react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { ShareWhatsAppButton } from "./ShareWhatsAppButton";
+import { CopyLinkButton } from "./CopyLinkButton";
 import { ShareButtons } from "./ShareButtons";
 import { dict, type Locale } from "@/lib/i18n";
+import { siteUrl } from "@/lib/seo";
 
 export function ThankYouView({ locale }: { locale: Locale }) {
   const t = dict[locale];
   const home = locale === "es" ? "/es" : "/";
+  const url = `${siteUrl}${locale === "es" ? "/es" : "/"}`;
   return (
     <>
       <SiteHeader locale={locale} />
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
         <div className="rounded-2xl bg-[var(--brand-soft)] p-6 ring-1 ring-[var(--brand)]/25">
-          <Heart className="h-10 w-10 text-[var(--brand-deep)]" aria-hidden />
-          <h1 className="mt-2 text-3xl font-extrabold text-zinc-900 sm:text-4xl">
+          <Heart
+            className="heartbeat h-10 w-10 fill-[var(--donate)] text-[var(--donate)]"
+            aria-hidden
+          />
+          <h1 className="font-display mt-2 text-3xl font-extrabold text-zinc-900 sm:text-4xl">
             {t.thankyouTitle}
           </h1>
           <p className="mt-2 text-zinc-800">{t.thankyouBody}</p>
@@ -28,9 +35,19 @@ export function ThankYouView({ locale }: { locale: Locale }) {
           <p className="mt-6 text-sm font-semibold text-zinc-800">
             {t.sharePrompt}
           </p>
-          <div className="mt-2">
-            <ShareButtons locale={locale} />
+          <div className="mt-2 flex flex-wrap gap-2">
+            <ShareWhatsAppButton url={url} locale={locale} />
+            <CopyLinkButton locale={locale} url={url} />
           </div>
+
+          <details className="mt-4 text-xs text-zinc-500">
+            <summary className="cursor-pointer hover:text-zinc-700">
+              {locale === "es" ? "Más opciones" : "More options"}
+            </summary>
+            <div className="mt-2">
+              <ShareButtons locale={locale} />
+            </div>
+          </details>
 
           <Link
             href={home}

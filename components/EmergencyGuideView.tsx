@@ -13,6 +13,8 @@ import { QuickExitButton } from "./QuickExitButton";
 import { LanguageToggle } from "./LanguageToggle";
 import { PrintButton } from "./PrintButton";
 import { ReviewBadge } from "./ReviewBadge";
+import { ShareWhatsAppButton } from "./ShareWhatsAppButton";
+import { SharePrompt } from "./SharePrompt";
 
 export async function EmergencyGuideView({
   guide,
@@ -88,12 +90,24 @@ export async function EmergencyGuideView({
       </div>
 
       <main className="mx-auto w-full max-w-3xl px-4 py-6">
+        <div className="mb-5 flex justify-end no-print">
+          <ShareWhatsAppButton url={pageUrl} locale={locale} size="sm" />
+        </div>
+
         <StepFlow
           steps={guide.steps}
           locale={locale}
           labels={{ say: t.sayThis, doNot: t.doNotDo, listen: t.listen }}
           guideSlug={guide.slug}
         />
+
+        <div className="mt-8 no-print">
+          <SharePrompt
+            url={pageUrl}
+            locale={locale}
+            storageKey={`td-share-prompt-${guide.slug}`}
+          />
+        </div>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           <a

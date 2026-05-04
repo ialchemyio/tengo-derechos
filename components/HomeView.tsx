@@ -14,11 +14,13 @@ import {
 } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 import { hasAudioForGuide } from "@/lib/audio";
+import { siteUrl } from "@/lib/seo";
 import { EmergencyButton } from "./EmergencyButton";
 import { TrustBanner } from "./TrustBanner";
 import { OfflineNotice } from "./OfflineNotice";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { ShareWhatsAppButton } from "./ShareWhatsAppButton";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const t = dict[locale];
@@ -169,6 +171,18 @@ export function HomeView({ locale }: { locale: Locale }) {
               subtitle={locale === "es" ? "Cerca de ti" : "Near you"}
               icon={Users}
               tone="neutral"
+            />
+          </div>
+          <div className="mt-5 flex flex-col items-center gap-2 rounded-2xl bg-white p-5 text-center ring-1 ring-[var(--hairline)] sm:flex-row sm:items-center sm:justify-between sm:text-left">
+            <p className="text-sm font-semibold text-zinc-800">
+              {locale === "es"
+                ? "Comparte estas guías con quien lo necesite."
+                : "Share these guides with someone who needs them."}
+            </p>
+            <ShareWhatsAppButton
+              url={`${siteUrl}${locale === "es" ? "/es" : "/"}`}
+              locale={locale}
+              size="sm"
             />
           </div>
         </section>
