@@ -31,6 +31,8 @@ const enRoutes = [
   "/about/open-source",
   "/press",
   "/impact",
+  "/embed",
+  "/prepare",
   "/disclaimer",
 ];
 

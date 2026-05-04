@@ -109,6 +109,17 @@ export async function EmergencyGuideView({
           />
         </div>
 
+        <div className="mt-4 flex justify-center no-print">
+          <Link
+            href={locale === "es" ? "/es/prepare" : "/prepare"}
+            className="inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--accent)]/90 hover:shadow-md"
+          >
+            {locale === "es"
+              ? "Haz un plan familiar de emergencia"
+              : "Make a family emergency plan"}
+          </Link>
+        </div>
+
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           <a
             href="tel:211"

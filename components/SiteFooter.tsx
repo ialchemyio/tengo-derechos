@@ -32,6 +32,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 <li><Link href={p("/rights")} className="hover:text-white">{t.rights}</Link></li>
                 <li><Link href={p("/resources")} className="hover:text-white">{t.resources}</Link></li>
                 <li><Link href={p("/lawyers")} className="hover:text-white">{t.findLawyer}</Link></li>
+                <li><Link href={p("/prepare")} className="hover:text-white">{locale === "es" ? "Plan familiar" : "Family plan"}</Link></li>
+                <li><Link href={p("/embed")} className="hover:text-white">{locale === "es" ? "Integrar" : "Embed"}</Link></li>
                 <li><Link href={p("/donate")} className="hover:text-white">{t.donate}</Link></li>
               </ul>
             </div>

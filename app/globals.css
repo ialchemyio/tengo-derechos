@@ -97,6 +97,11 @@ body::before {
   header, footer, .no-print { display: none !important; }
   body { background: #fff; color: #000; }
   body::before { display: none; }
+  /* Family preparedness plan print refinements */
+  @page { margin: 14mm; }
+  main { max-width: 100% !important; padding: 0 !important; }
+  h1, h2 { page-break-after: avoid; }
+  .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
 }
 
 /* Heartbeat — resting heart rate ~60 bpm (one cycle per second).

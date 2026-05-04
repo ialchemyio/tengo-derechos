@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Globe2,
   HandCoins,
+  ChevronRight,
 } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 import { hasAudioForGuide } from "@/lib/audio";
@@ -205,6 +206,15 @@ export function HomeView({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ol>
+          <Link
+            href={p("/prepare")}
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-bold text-white hover:bg-[var(--accent)]/90"
+          >
+            {locale === "es"
+              ? "Haz un plan familiar de emergencia"
+              : "Make a family emergency plan"}
+            <ChevronRight className="h-4 w-4" aria-hidden />
+          </Link>
         </section>
 
         {/* Donate + Rights */}
