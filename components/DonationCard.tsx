@@ -56,8 +56,8 @@ export function DonationCard({ locale }: { locale: Locale }) {
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-      <div className="mb-4 flex items-center gap-2 text-[var(--brand-deep)]">
-        <Heart className="h-5 w-5" aria-hidden />
+      <div className="mb-4 flex items-center gap-2 text-[var(--donate)]">
+        <Heart className="heartbeat h-5 w-5 fill-[var(--donate)]" aria-hidden />
         <h2 className="text-xl font-bold text-zinc-900">
           {locale === "es" ? "Apoya a las familias" : "Support families"}
         </h2>
@@ -120,7 +120,7 @@ export function DonationCard({ locale }: { locale: Locale }) {
       <button
         onClick={donate}
         disabled={pending}
-        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--brand)] px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-[var(--brand-deep)] focus:outline-none focus:ring-4 focus:ring-[var(--brand)]/40 disabled:opacity-70"
+        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--donate)] px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-[var(--donate-deep)] focus:outline-none focus:ring-4 focus:ring-[var(--donate)]/40 disabled:opacity-70"
       >
         {pending ? (
           <>
@@ -128,7 +128,13 @@ export function DonationCard({ locale }: { locale: Locale }) {
             {t.donateProcessing}
           </>
         ) : (
-          <>{locale === "es" ? "Donar ahora" : "Donate now"}</>
+          <>
+            <Heart
+              className="heartbeat h-4 w-4 fill-white"
+              aria-hidden
+            />
+            {locale === "es" ? "Donar ahora" : "Donate now"}
+          </>
         )}
       </button>
 

@@ -25,6 +25,11 @@
   --danger-deep: #8a1f12;
   --danger-soft: #fde2dc;
 
+  /* Donate — deep maroon, distinct from emergency red. */
+  --donate: #8a1d2c;
+  --donate-deep: #5e0f1c;
+  --donate-soft: #f6dde0;
+
   /* Borders */
   --hairline: #e9e1d3;
 }
@@ -94,10 +99,29 @@ body::before {
   body::before { display: none; }
 }
 
+/* Heartbeat — resting heart rate ~60 bpm (one cycle per second).
+   Two-beat 'lub-dub' pulse: stronger first beat, softer second, then a long
+   diastole rest. Used for the Donate CTA heart glyph. */
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  10%  { transform: scale(1.22); }
+  22%  { transform: scale(1); }
+  34%  { transform: scale(1.12); }
+  46%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+.heartbeat {
+  animation: heartbeat 1s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0ms !important;
     transition-duration: 0ms !important;
   }
+  .heartbeat { animation: none !important; }
 }

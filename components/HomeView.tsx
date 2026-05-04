@@ -197,8 +197,13 @@ export function HomeView({ locale }: { locale: Locale }) {
         <section className="mt-10 grid gap-4 sm:grid-cols-2">
           <Link
             href={p("/donate")}
-            className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--brand)] to-[var(--brand-deep)] p-6 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+            aria-label={t.donate}
+            className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--donate)] to-[var(--donate-deep)] p-6 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
           >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-white/[0.06] blur-2xl"
+            />
             <div className="relative">
               <div className="font-display text-xl font-bold">{t.donate}</div>
               <div className="mt-1 text-sm text-white/85">
@@ -207,7 +212,10 @@ export function HomeView({ locale }: { locale: Locale }) {
                   : "Support families in crisis"}
               </div>
             </div>
-            <Heart className="relative h-9 w-9 opacity-90" aria-hidden />
+            <Heart
+              className="heartbeat relative h-10 w-10 fill-white/95 stroke-white"
+              aria-hidden
+            />
           </Link>
           <Link
             href={p("/rights")}

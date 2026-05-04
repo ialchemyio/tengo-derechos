@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield } from "lucide-react";
+import { Shield, Heart } from "lucide-react";
 import { LanguageToggle } from "./LanguageToggle";
 import { dict, type Locale } from "@/lib/i18n";
 
@@ -24,8 +24,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-2">
           <Link
             href={donateHref}
-            className="rounded-full bg-[var(--brand)] px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-deep)]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--donate)] px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--donate-deep)]"
           >
+            <Heart
+              className="heartbeat h-3.5 w-3.5 fill-white"
+              aria-hidden
+            />
             {t.donate}
           </Link>
           <LanguageToggle />
