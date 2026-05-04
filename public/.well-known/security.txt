@@ -1,0 +1,9 @@
+# Security disclosure for tengoderechos.org
+# Per RFC 9116. Last updated 2026-05-04.
+
+Contact: mailto:security@tengoderechos.org
+Expires: 2027-05-04T00:00:00.000Z
+Preferred-Languages: en, es
+Canonical: https://tengoderechos.org/.well-known/security.txt
+Policy: https://tengoderechos.org/about/security
+Hiring: https://tengoderechos.org/about/team

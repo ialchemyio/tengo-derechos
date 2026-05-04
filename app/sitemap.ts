@@ -23,6 +23,14 @@ const enRoutes = [
   "/about/offline",
   "/about/transparency",
   "/about/audio",
+  "/about/methodology",
+  "/about/privacy",
+  "/about/accessibility",
+  "/about/security",
+  "/about/team",
+  "/about/open-source",
+  "/press",
+  "/impact",
   "/disclaimer",
 ];
 

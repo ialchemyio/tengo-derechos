@@ -22,25 +22,45 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               {t.legalNotice}
             </p>
           </div>
-          <nav className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
-            <Link href={p("/about")} className="hover:text-white">{t.about}</Link>
-            <Link href={p("/disclaimer")} className="hover:text-white">{t.disclaimer}</Link>
-            <Link href={p("/resources")} className="hover:text-white">{t.resources}</Link>
-            <Link href={p("/lawyers")} className="hover:text-white">{t.findLawyer}</Link>
-            <Link href={p("/donate")} className="hover:text-white">{t.donate}</Link>
-            <Link href={p("/about/transparency")} className="hover:text-white">
-              {t.transparencyTitle}
-            </Link>
-            <Link href={p("/about/audio")} className="hover:text-white">
-              {locale === "es" ? "Audio" : "Audio"}
-            </Link>
-            <Link
-              href={p("/admin/content-guide")}
-              className="hover:text-white"
-            >
-              {locale === "es" ? "Guía de contenido" : "Content guide"}
-            </Link>
-          </nav>
+          <div className="grid gap-6 text-sm sm:grid-cols-3">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#a8b3cb]">
+                {locale === "es" ? "Producto" : "Product"}
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                <li><Link href={p("/emergency")} className="hover:text-white">{t.emergency}</Link></li>
+                <li><Link href={p("/rights")} className="hover:text-white">{t.rights}</Link></li>
+                <li><Link href={p("/resources")} className="hover:text-white">{t.resources}</Link></li>
+                <li><Link href={p("/lawyers")} className="hover:text-white">{t.findLawyer}</Link></li>
+                <li><Link href={p("/donate")} className="hover:text-white">{t.donate}</Link></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#a8b3cb]">
+                {locale === "es" ? "Sobre nosotros" : "About"}
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                <li><Link href={p("/about")} className="hover:text-white">{t.about}</Link></li>
+                <li><Link href={p("/about/team")} className="hover:text-white">{locale === "es" ? "Equipo" : "Team"}</Link></li>
+                <li><Link href={p("/impact")} className="hover:text-white">{locale === "es" ? "Impacto" : "Impact"}</Link></li>
+                <li><Link href={p("/about/transparency")} className="hover:text-white">{t.transparencyTitle}</Link></li>
+                <li><Link href={p("/press")} className="hover:text-white">{locale === "es" ? "Prensa" : "Press"}</Link></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#a8b3cb]">
+                {locale === "es" ? "Confianza" : "Trust"}
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                <li><Link href={p("/about/methodology")} className="hover:text-white">{locale === "es" ? "Metodología" : "Methodology"}</Link></li>
+                <li><Link href={p("/about/privacy")} className="hover:text-white">{locale === "es" ? "Privacidad" : "Privacy"}</Link></li>
+                <li><Link href={p("/about/accessibility")} className="hover:text-white">{locale === "es" ? "Accesibilidad" : "Accessibility"}</Link></li>
+                <li><Link href={p("/about/security")} className="hover:text-white">{locale === "es" ? "Seguridad" : "Security"}</Link></li>
+                <li><Link href={p("/about/open-source")} className="hover:text-white">{locale === "es" ? "Código abierto" : "Open source"}</Link></li>
+                <li><Link href={p("/disclaimer")} className="hover:text-white">{t.disclaimer}</Link></li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#a8b3cb]">
           <p>© {new Date().getFullYear()} Tengo Derechos · {dict.es.tagline}</p>
