@@ -79,8 +79,8 @@ export function fullGuideUrlFor(
 }
 
 export const DEFAULT_SHARE_TEXT: Record<Locale, string> = {
-  en: "If you ever need it, this shows what to do step-by-step in emergencies. Save it on your phone.",
-  es: "Por si algún día lo necesitas, aquí explica paso a paso qué hacer en emergencias. Guárdalo en tu teléfono.",
+  en: "Save this. If something happens, this shows exactly what to do step by step.",
+  es: "Guarda esto. Si pasa algo, aquí te dice exactamente qué hacer paso por paso.",
 };
 
 export function buildWhatsAppHref(
