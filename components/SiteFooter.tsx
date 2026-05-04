@@ -1,26 +1,49 @@
 import Link from "next/link";
+import { Shield } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = dict[locale];
   const p = (path: string) => (locale === "es" ? `/es${path}` : path);
   return (
-    <footer className="mt-16 border-t border-zinc-200 bg-zinc-50/60">
-      <div className="mx-auto max-w-5xl px-4 py-8 text-sm text-zinc-600">
-        <p className="font-semibold text-zinc-900">Tengo Derechos</p>
-        <p className="mt-1 max-w-2xl">{t.legalNotice}</p>
-        <nav className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-          <Link href={p("/about")} className="hover:underline">{t.about}</Link>
-          <Link href={p("/disclaimer")} className="hover:underline">{t.disclaimer}</Link>
-          <Link href={p("/resources")} className="hover:underline">{t.resources}</Link>
-          <Link href={p("/lawyers")} className="hover:underline">{t.findLawyer}</Link>
-          <Link href={p("/donate")} className="hover:underline">{t.donate}</Link>
-          <Link href={p("/admin/content-guide")} className="hover:underline">
-            {locale === "es" ? "Guía de contenido" : "Content guide"}
-          </Link>
-        </nav>
-        <p className="mt-6 text-xs text-zinc-500">
-          © {new Date().getFullYear()} Tengo Derechos. {dict.es.tagline}
+    <footer className="mt-16 border-t border-[var(--hairline)] bg-[var(--accent)] text-[#dde4f3]">
+      <div className="mx-auto max-w-5xl px-4 py-10">
+        <div className="flex flex-wrap items-start justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-2 text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/20">
+                <Shield className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="font-display text-lg font-bold">
+                Tengo Derechos
+              </span>
+            </div>
+            <p className="mt-3 max-w-md text-sm text-[#cdd5e8]">
+              {t.legalNotice}
+            </p>
+          </div>
+          <nav className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+            <Link href={p("/about")} className="hover:text-white">{t.about}</Link>
+            <Link href={p("/disclaimer")} className="hover:text-white">{t.disclaimer}</Link>
+            <Link href={p("/resources")} className="hover:text-white">{t.resources}</Link>
+            <Link href={p("/lawyers")} className="hover:text-white">{t.findLawyer}</Link>
+            <Link href={p("/donate")} className="hover:text-white">{t.donate}</Link>
+            <Link href={p("/about/transparency")} className="hover:text-white">
+              {t.transparencyTitle}
+            </Link>
+            <Link href={p("/about/audio")} className="hover:text-white">
+              {locale === "es" ? "Audio" : "Audio"}
+            </Link>
+            <Link
+              href={p("/admin/content-guide")}
+              className="hover:text-white"
+            >
+              {locale === "es" ? "Guía de contenido" : "Content guide"}
+            </Link>
+          </nav>
+        </div>
+        <p className="mt-8 border-t border-white/10 pt-6 text-xs text-[#a8b3cb]">
+          © {new Date().getFullYear()} Tengo Derechos · {dict.es.tagline}
         </p>
       </div>
     </footer>

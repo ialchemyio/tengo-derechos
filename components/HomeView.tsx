@@ -8,6 +8,9 @@ import {
   Users,
   Heart,
   ShieldAlert,
+  ShieldCheck,
+  Globe2,
+  HandCoins,
 } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 import { hasAudioForGuide } from "@/lib/audio";
@@ -20,39 +23,103 @@ import { SiteFooter } from "./SiteFooter";
 export function HomeView({ locale }: { locale: Locale }) {
   const t = dict[locale];
   const p = (path: string) => (locale === "es" ? `/es${path}` : path);
-  const audioLabel = locale === "es" ? "Audio" : "Audio";
+  const audioLabel = "Audio";
+
+  const trustItems = [
+    {
+      icon: ShieldCheck,
+      title: locale === "es" ? "Revisado por abogados" : "Attorney-reviewed",
+      sub: locale === "es" ? "(en proceso)" : "(in progress)",
+    },
+    {
+      icon: Globe2,
+      title: locale === "es" ? "Bilingüe" : "Bilingual",
+      sub: "EN · ES",
+    },
+    {
+      icon: HandCoins,
+      title: locale === "es" ? "Sin costo" : "Always free",
+      sub: locale === "es" ? "y sin anuncios" : "no ads",
+    },
+  ];
+
   return (
     <>
       <SiteHeader locale={locale} />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-12 pt-6">
-        <section className="rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-amber-50 p-6 ring-1 ring-zinc-200 sm:p-10">
-          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
-            {t.brand}
-          </p>
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight text-zinc-900 sm:text-5xl">
-            {t.tagline}
-          </h1>
-          <p className="mt-3 max-w-2xl text-lg text-zinc-700">{t.heroSub}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href={p("/emergency")}
-              className="inline-flex items-center gap-2 rounded-2xl bg-red-600 px-5 py-3 text-base font-bold text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300"
-            >
-              <ShieldAlert className="h-5 w-5" aria-hidden />
-              {t.needHelp}
-            </Link>
-            <Link
-              href={p("/resources")}
-              className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-base font-bold text-zinc-900 shadow-sm ring-1 ring-zinc-300 hover:bg-zinc-50"
-            >
-              {t.resources}
-            </Link>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-6">
+        {/* Hero */}
+        <section className="relative overflow-hidden rounded-3xl border border-[var(--hairline)] bg-gradient-to-br from-[var(--brand-soft)] via-white to-[var(--accent-soft)] p-6 shadow-sm sm:p-10">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "radial-gradient(currentColor 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+              color: "var(--accent)",
+            }}
+          />
+          <div className="relative">
+            <p className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/20">
+              <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+              {t.brand}
+            </p>
+            <h1 className="font-display mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-zinc-900 sm:text-6xl">
+              {t.tagline}
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg text-zinc-700 sm:text-xl">
+              {t.heroSub}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href={p("/emergency")}
+                className="inline-flex items-center gap-2 rounded-2xl bg-[var(--danger)] px-5 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[var(--danger-deep)] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[var(--danger)]/30"
+              >
+                <ShieldAlert className="h-5 w-5" aria-hidden />
+                {t.needHelp}
+              </Link>
+              <Link
+                href={p("/resources")}
+                className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-[var(--hairline)] transition hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--accent)]/40"
+              >
+                {t.resources}
+              </Link>
+            </div>
+
+            <ul className="mt-8 grid grid-cols-1 gap-2 text-sm sm:grid-cols-3">
+              {trustItems.map((item) => (
+                <li
+                  key={item.title}
+                  className="flex items-center gap-2 rounded-xl bg-white/65 px-3 py-2 ring-1 ring-[var(--hairline)] backdrop-blur"
+                >
+                  <item.icon
+                    className="h-4 w-4 text-[var(--brand)]"
+                    aria-hidden
+                  />
+                  <span className="font-semibold text-zinc-900">
+                    {item.title}
+                  </span>
+                  <span className="text-zinc-500">{item.sub}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section className="mt-8">
-          <h2 className="mb-3 text-xl font-bold text-zinc-900">{t.whatHappening}</h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {/* Scenario grid */}
+        <section className="mt-10">
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-2xl font-bold text-zinc-900">
+              {t.whatHappening}
+            </h2>
+            <Link
+              href={p("/emergency")}
+              className="text-sm font-semibold text-[var(--accent)] hover:underline"
+            >
+              {locale === "es" ? "Ver todo →" : "See all →"}
+            </Link>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
             <EmergencyButton
               href={p("/emergency/ice-at-door")}
               title={t.iceAtDoor}
@@ -106,50 +173,62 @@ export function HomeView({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="mt-10 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-          <h2 className="text-xl font-bold text-zinc-900">{t.howItHelps}</h2>
-          <ol className="mt-4 grid gap-4 sm:grid-cols-3">
+        {/* How it helps */}
+        <section className="mt-12 overflow-hidden rounded-3xl border border-[var(--hairline)] bg-white p-6 sm:p-8">
+          <h2 className="font-display text-2xl font-bold text-zinc-900">
+            {t.howItHelps}
+          </h2>
+          <ol className="mt-6 grid gap-5 sm:grid-cols-3">
             {[t.step1, t.step2, t.step3].map((step, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
+              <li
+                key={i}
+                className="relative rounded-2xl bg-[var(--accent-soft)]/40 p-5 ring-1 ring-[var(--accent)]/15"
+              >
+                <span className="font-display absolute -top-3 left-4 inline-flex h-8 min-w-[2rem] items-center justify-center rounded-full bg-[var(--accent)] px-2 text-sm font-bold text-white shadow">
                   {i + 1}
                 </span>
-                <span className="text-zinc-800">{step}</span>
+                <p className="mt-2 text-zinc-800">{step}</p>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-2">
+        {/* Donate + Rights */}
+        <section className="mt-10 grid gap-4 sm:grid-cols-2">
           <Link
             href={p("/donate")}
-            className="flex items-center justify-between gap-4 rounded-2xl bg-emerald-600 p-5 text-white shadow-sm hover:bg-emerald-700"
+            className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--brand)] to-[var(--brand-deep)] p-6 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <div>
-              <div className="text-lg font-bold">{t.donate}</div>
-              <div className="text-sm opacity-90">
+            <div className="relative">
+              <div className="font-display text-xl font-bold">{t.donate}</div>
+              <div className="mt-1 text-sm text-emerald-50">
                 {locale === "es"
                   ? "Apoya a las familias en momentos difíciles"
                   : "Support families in crisis"}
               </div>
             </div>
-            <Heart className="h-8 w-8" aria-hidden />
+            <Heart className="relative h-9 w-9 opacity-90" aria-hidden />
           </Link>
           <Link
             href={p("/rights")}
-            className="flex items-center justify-between gap-4 rounded-2xl bg-white p-5 ring-1 ring-zinc-200 hover:ring-zinc-400"
+            className="group flex items-center justify-between gap-4 rounded-2xl bg-white p-6 ring-1 ring-[var(--hairline)] transition hover:-translate-y-0.5 hover:ring-[var(--accent)]/40 hover:shadow-md"
           >
             <div>
-              <div className="text-lg font-bold text-zinc-900">{t.rights}</div>
-              <div className="text-sm text-zinc-600">
+              <div className="font-display text-xl font-bold text-zinc-900">
+                {t.rights}
+              </div>
+              <div className="mt-1 text-sm text-zinc-600">
                 {locale === "es" ? "Aprende lo básico" : "Learn the basics"}
               </div>
             </div>
-            <AlertTriangle className="h-8 w-8 text-emerald-600" aria-hidden />
+            <AlertTriangle
+              className="h-8 w-8 text-[var(--accent)] transition group-hover:scale-110"
+              aria-hidden
+            />
           </Link>
         </section>
 
-        <div className="mt-10 space-y-4">
+        <div className="mt-12 space-y-4">
           <TrustBanner locale={locale} />
           <OfflineNotice locale={locale} />
         </div>

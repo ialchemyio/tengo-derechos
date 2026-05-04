@@ -8,21 +8,23 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const home = locale === "es" ? "/es" : "/";
   const donateHref = locale === "es" ? "/es/donate" : "/donate";
   return (
-    <header className="sticky top-0 z-30 border-b border-zinc-200 bg-[#fdfaf3]/85 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-[var(--hairline)] bg-[color:var(--background)]/80 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--background)]/65">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
         <Link
           href={home}
-          className="flex items-center gap-2 font-bold text-zinc-900"
+          className="group flex items-center gap-2 font-semibold text-zinc-900"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--brand)] text-white shadow-sm ring-1 ring-[var(--brand-deep)]/30 transition group-hover:scale-105">
             <Shield className="h-5 w-5" aria-hidden />
           </span>
-          <span>Tengo Derechos</span>
+          <span className="font-display text-base font-bold tracking-tight sm:text-lg">
+            Tengo Derechos
+          </span>
         </Link>
         <div className="flex items-center gap-2">
           <Link
             href={donateHref}
-            className="rounded-full bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700"
+            className="rounded-full bg-[var(--brand)] px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-deep)]"
           >
             {t.donate}
           </Link>

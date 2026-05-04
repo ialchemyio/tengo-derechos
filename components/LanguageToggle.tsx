@@ -15,7 +15,7 @@ export function LanguageToggle() {
   return (
     <Link
       href={target}
-      className="inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/70 px-3 py-1.5 text-sm font-medium text-zinc-800 backdrop-blur hover:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--hairline)] bg-white/70 px-3 py-1.5 text-sm font-medium text-[var(--accent)] backdrop-blur transition hover:bg-white hover:border-[var(--accent)]/40 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
       aria-label={isEs ? "Switch to English" : "Cambiar a Español"}
     >
       <Languages className="h-4 w-4" aria-hidden />

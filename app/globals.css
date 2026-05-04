@@ -1,37 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdfaf3;
-  --foreground: #1a1a1a;
+  /* Base */
+  --background: #fbf7ef;
+  --surface: #ffffff;
+  --foreground: #131613;
+  --muted: #5f5b54;
+
+  /* Brand */
+  --brand: #057a55;          /* emerald — primary action / trust */
+  --brand-deep: #035c3f;
+  --brand-soft: #d6f0e3;
+
+  /* Complementary cool — slate-blue/indigo for legal/trust gravitas */
+  --accent: #2b3a55;         /* deep ink */
+  --accent-soft: #e1e7f3;
+
+  /* Warm gold — used only for the "verified" state */
+  --gold: #b88a2a;
+  --gold-soft: #fbeac3;
+
+  /* Emergency */
+  --danger: #b9341d;         /* warm-red, slightly muted from raw red-600 */
+  --danger-deep: #8a1f12;
+  --danger-soft: #fde2dc;
+
+  /* Borders */
+  --hairline: #e9e1d3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-danger: var(--danger);
+  --color-danger-deep: var(--danger-deep);
+  --color-hairline: var(--hairline);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 html, body {
   background-color: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans, ui-sans-serif), system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 17px;
   line-height: 1.55;
+  font-feature-settings: "ss01", "cv11";
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display, ui-serif), ui-serif, Georgia, serif;
+  letter-spacing: -0.015em;
 }
 
 @media (prefers-contrast: more) {
-  :root { --background: #ffffff; --foreground: #000000; }
+  :root { --background: #ffffff; --foreground: #000000; --hairline: #000000; }
 }
 
 a:focus-visible, button:focus-visible {
-  outline: 3px solid #059669;
+  outline: 3px solid var(--brand);
   outline-offset: 2px;
+}
+
+/* Subtle paper-grain backdrop on the body. Not on emergency overlays. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(43, 58, 85, 0.05), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(5, 122, 85, 0.06), transparent 60%);
 }
 
 @media print {
   header, footer, .no-print { display: none !important; }
   body { background: #fff; color: #000; }
+  body::before { display: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
 }

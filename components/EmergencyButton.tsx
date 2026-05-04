@@ -1,16 +1,29 @@
 import Link from "next/link";
-import { type LucideIcon, Headphones } from "lucide-react";
+import { type LucideIcon, Headphones, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Tone = "red" | "amber" | "teal" | "indigo" | "emerald" | "neutral";
 
 const toneClasses: Record<Tone, string> = {
-  red: "from-red-50 to-red-100 ring-red-200 hover:ring-red-400 text-red-900",
-  amber: "from-amber-50 to-amber-100 ring-amber-200 hover:ring-amber-400 text-amber-900",
-  teal: "from-teal-50 to-teal-100 ring-teal-200 hover:ring-teal-400 text-teal-900",
-  indigo: "from-indigo-50 to-indigo-100 ring-indigo-200 hover:ring-indigo-400 text-indigo-900",
-  emerald: "from-emerald-50 to-emerald-100 ring-emerald-200 hover:ring-emerald-400 text-emerald-900",
-  neutral: "from-zinc-50 to-zinc-100 ring-zinc-200 hover:ring-zinc-400 text-zinc-900",
+  red: "bg-gradient-to-br from-[#fdecea] via-white to-[#fbe7e2] text-[var(--danger-deep)] ring-[var(--danger)]/15 hover:ring-[var(--danger)]/45",
+  amber:
+    "bg-gradient-to-br from-[#fbeed0] via-white to-[#f7e7c0] text-[#7a5314] ring-[var(--gold)]/20 hover:ring-[var(--gold)]/55",
+  teal: "bg-gradient-to-br from-[#dff3ee] via-white to-[#cfe9e1] text-[#175a4f] ring-emerald-300/40 hover:ring-emerald-500/50",
+  indigo:
+    "bg-gradient-to-br from-[#dde4f3] via-white to-[#c9d3ea] text-[var(--accent)] ring-[var(--accent)]/20 hover:ring-[var(--accent)]/55",
+  emerald:
+    "bg-gradient-to-br from-[var(--brand-soft)] via-white to-[#c2e6d4] text-[var(--brand-deep)] ring-[var(--brand)]/25 hover:ring-[var(--brand)]/55",
+  neutral:
+    "bg-gradient-to-br from-[#f0ece1] via-white to-[#e6dfd0] text-zinc-800 ring-[var(--hairline)] hover:ring-zinc-400",
+};
+
+const iconBgFor: Record<Tone, string> = {
+  red: "bg-[var(--danger)] text-white",
+  amber: "bg-[var(--gold)] text-white",
+  teal: "bg-emerald-700 text-white",
+  indigo: "bg-[var(--accent)] text-white",
+  emerald: "bg-[var(--brand)] text-white",
+  neutral: "bg-zinc-700 text-white",
 };
 
 export function EmergencyButton({
@@ -34,23 +47,38 @@ export function EmergencyButton({
     <Link
       href={href}
       className={cn(
-        "group relative flex min-h-[7.5rem] flex-col justify-between rounded-2xl bg-gradient-to-br p-5 shadow-sm ring-1 transition focus:outline-none focus:ring-4",
+        "group relative flex min-h-[8.5rem] flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm ring-1 transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-4",
         toneClasses[tone]
       )}
     >
       <div className="flex items-start justify-between">
-        <Icon className="h-8 w-8 opacity-90 transition group-hover:scale-110" aria-hidden />
+        <span
+          className={cn(
+            "inline-flex h-10 w-10 items-center justify-center rounded-xl shadow-sm transition group-hover:scale-105",
+            iconBgFor[tone]
+          )}
+        >
+          <Icon className="h-5 w-5" aria-hidden />
+        </span>
         {hasAudio ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+          <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-semibold text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/30 backdrop-blur">
             <Headphones className="h-3 w-3" aria-hidden />
             {audioLabel ?? "Audio"}
           </span>
         ) : null}
       </div>
       <div>
-        <div className="text-lg font-bold leading-tight">{title}</div>
+        <div className="font-display text-lg font-bold leading-tight">
+          {title}
+        </div>
         {subtitle ? (
-          <div className="mt-0.5 text-sm opacity-80">{subtitle}</div>
+          <div className="mt-0.5 flex items-center gap-1 text-sm opacity-80">
+            {subtitle}
+            <ChevronRight
+              className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100"
+              aria-hidden
+            />
+          </div>
         ) : null}
       </div>
     </Link>

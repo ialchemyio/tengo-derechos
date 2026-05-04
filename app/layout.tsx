@@ -1,7 +1,20 @@
 import "./globals.css";
+import { Inter, Fraunces } from "next/font/google";
 import { baseMetadata, orgJsonLd } from "@/lib/seo";
 import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
 import { OfflineStatus } from "@/components/OfflineStatus";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["600", "700", "800"],
+});
 
 export const metadata = {
   ...baseMetadata,
@@ -26,7 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="h-full antialiased">
+    <html
+      lang="es"
+      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+    >
       <head>
         <link rel="manifest" href="/manifest.json" />
         <script
