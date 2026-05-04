@@ -9,10 +9,12 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "icons": "node scripts/generate-icons.mjs",
-    "audio": "node scripts/generate-audio.mjs"
+    "audio": "node scripts/generate-audio.mjs",
+    "resources:export": "node scripts/export-resources.mjs"
   },
   "dependencies": {
     "@stripe/stripe-js": "^9.4.0",
+    "@supabase/supabase-js": "^2.105.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

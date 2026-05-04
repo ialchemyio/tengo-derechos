@@ -5,6 +5,10 @@ export const metadata = {
   description: "Encuentra ayuda legal, clínicas, líneas de ayuda y más.",
 };
 
-export default function Page() {
-  return <ResourcesPageView locale="es" />;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  return <ResourcesPageView locale="es" searchParams={searchParams} />;
 }

@@ -14,6 +14,7 @@ const enRoutes = [
   "/rights/housing",
   "/rights/medical",
   "/resources",
+  "/resources/submit",
   "/lawyers",
   "/donate",
   "/about",

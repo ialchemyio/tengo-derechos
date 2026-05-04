@@ -1,6 +1,7 @@
-import { Phone, Globe, MapPin } from "lucide-react";
+import { Phone, Globe, MapPin, ShieldCheck, Clock } from "lucide-react";
 import type { Resource } from "@/lib/resources";
 import type { Locale } from "@/lib/i18n";
+import { dict } from "@/lib/i18n";
 import { categoryLabels } from "@/lib/resources";
 
 export function ResourceCard({
@@ -10,6 +11,8 @@ export function ResourceCard({
   resource: Resource;
   locale: Locale;
 }) {
+  const t = dict[locale];
+  const isVerified = !!resource.verifiedAt;
   return (
     <article className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-200">
       <div className="flex flex-wrap items-start justify-between gap-2">
@@ -21,11 +24,24 @@ export function ResourceCard({
             {categoryLabels[resource.category][locale]}
           </p>
         </div>
-        {resource.emergency ? (
-          <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
-            {locale === "es" ? "Emergencia" : "Emergency"}
-          </span>
-        ) : null}
+        <div className="flex flex-wrap items-center gap-1">
+          {resource.emergency ? (
+            <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
+              {locale === "es" ? "Emergencia" : "Emergency"}
+            </span>
+          ) : null}
+          {isVerified ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+              <ShieldCheck className="h-3 w-3" aria-hidden />
+              {t.verifiedBadge}
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-800 ring-1 ring-amber-200">
+              <Clock className="h-3 w-3" aria-hidden />
+              {t.pendingBadge}
+            </span>
+          )}
+        </div>
       </div>
 
       {resource.notes ? (
