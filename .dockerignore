@@ -1,0 +1,38 @@
+# Build artifacts and OS junk
+.next
+.next-cache
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.DS_Store
+*.tsbuildinfo
+*.bak
+.git
+.github
+.vercel
+coverage
+
+# Local env (set in Coolify, never bake)
+.env
+.env.local
+.env.production
+.env.development
+
+# Runtime data — must come from a volume in production
+data
+!data/*.example.json
+
+# Editor
+.idea
+.vscode
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Tests / docs that don't need to ship
+*.md
+!README.md
+!DEPLOY_COOLIFY.md
