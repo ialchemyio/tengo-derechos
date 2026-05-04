@@ -80,7 +80,7 @@ export function AudioButton({
         onClick={toggle}
         aria-label={ariaLabel}
         aria-pressed={playing}
-        className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 ring-1 ring-emerald-200 hover:bg-emerald-100"
+        className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand-soft)] px-3 py-1 text-xs font-medium text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/25 hover:bg-[var(--brand-soft)]"
       >
         {playing ? (
           <Pause className="h-3.5 w-3.5" aria-hidden />
@@ -89,7 +89,7 @@ export function AudioButton({
         )}
         <span>{label}</span>
         {durationMs ? (
-          <span className="text-[10px] text-emerald-700">
+          <span className="text-[10px] text-[var(--brand-deep)]">
             {(durationMs / 1000).toFixed(1)}s
           </span>
         ) : null}
@@ -97,10 +97,10 @@ export function AudioButton({
       {playing ? (
         <span
           aria-hidden
-          className="block h-0.5 w-full overflow-hidden rounded bg-emerald-100"
+          className="block h-0.5 w-full overflow-hidden rounded bg-[var(--brand-soft)]"
         >
           <span
-            className="block h-full bg-emerald-600 transition-all"
+            className="block h-full bg-[var(--brand)] transition-all"
             style={{ width: `${Math.min(100, progress * 100)}%` }}
           />
         </span>

@@ -56,7 +56,7 @@ export function DonationCard({ locale }: { locale: Locale }) {
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-      <div className="mb-4 flex items-center gap-2 text-emerald-700">
+      <div className="mb-4 flex items-center gap-2 text-[var(--brand-deep)]">
         <Heart className="h-5 w-5" aria-hidden />
         <h2 className="text-xl font-bold text-zinc-900">
           {locale === "es" ? "Apoya a las familias" : "Support families"}
@@ -72,9 +72,9 @@ export function DonationCard({ locale }: { locale: Locale }) {
               setCustom("");
             }}
             disabled={pending}
-            className={`rounded-xl border px-3 py-3 text-base font-bold transition focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 ${
+            className={`rounded-xl border px-3 py-3 text-base font-bold transition focus:outline-none focus:ring-2 focus:ring-[var(--brand)] disabled:opacity-50 ${
               amount === a && !custom
-                ? "border-emerald-600 bg-emerald-50 text-emerald-900"
+                ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand-deep)]"
                 : "border-zinc-200 bg-white text-zinc-800 hover:border-zinc-400"
             }`}
             aria-pressed={amount === a && !custom}
@@ -97,7 +97,7 @@ export function DonationCard({ locale }: { locale: Locale }) {
           value={custom}
           onChange={(e) => setCustom(e.target.value)}
           disabled={pending}
-          className="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
+          className="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2 text-base focus:border-[var(--brand)] focus:outline-none focus:ring-2 focus:ring-[var(--brand)] disabled:opacity-50"
           placeholder="$"
         />
       </label>
@@ -113,14 +113,14 @@ export function DonationCard({ locale }: { locale: Locale }) {
         {locale === "es" ? "Hacer donación mensual" : "Make this a monthly gift"}
       </label>
 
-      <p className="mt-4 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">
+      <p className="mt-4 rounded-xl bg-[var(--brand-soft)] p-3 text-sm text-[var(--brand-deep)]">
         {impact}
       </p>
 
       <button
         onClick={donate}
         disabled={pending}
-        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300 disabled:opacity-70"
+        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--brand)] px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-[var(--brand-deep)] focus:outline-none focus:ring-4 focus:ring-[var(--brand)]/40 disabled:opacity-70"
       >
         {pending ? (
           <>

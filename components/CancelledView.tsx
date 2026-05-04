@@ -19,7 +19,7 @@ export function CancelledView({ locale }: { locale: Locale }) {
           <p className="mt-2 text-zinc-700">{t.cancelledBody}</p>
           <Link
             href={donateHref}
-            className="mt-6 inline-block rounded-2xl bg-emerald-600 px-5 py-3 font-bold text-white hover:bg-emerald-700"
+            className="mt-6 inline-block rounded-2xl bg-[var(--brand)] px-5 py-3 font-bold text-white hover:bg-[var(--brand-deep)]"
           >
             ← {t.backToDonate}
           </Link>

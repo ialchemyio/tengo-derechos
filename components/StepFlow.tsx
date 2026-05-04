@@ -66,7 +66,7 @@ export function StepFlow({
               ) : null}
             </div>
             <CheckCircle2
-              className="hidden h-6 w-6 text-emerald-500 sm:block"
+              className="hidden h-6 w-6 text-[var(--brand)] sm:block"
               aria-hidden
             />
           </div>

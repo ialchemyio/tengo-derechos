@@ -9,8 +9,8 @@ export function NonprofitStatusBanner({ locale }: { locale: Locale }) {
 
   if (status === "confirmed") {
     return (
-      <aside className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-950">
-        <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden />
+      <aside className="flex items-start gap-3 rounded-2xl border border-[var(--brand)]/25 bg-[var(--brand-soft)] p-4 text-[var(--brand-deep)]">
+        <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-deep)]" aria-hidden />
         <div className="text-sm">
           <p className="font-semibold">{t.nonprofitConfirmed}</p>
           {ein ? (

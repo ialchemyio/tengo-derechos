@@ -46,7 +46,7 @@ export function ShareButtons({ locale }: { locale: Locale }) {
       <button
         type="button"
         onClick={shareNative}
-        className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+        className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-deep)]"
       >
         <Share2 className="h-4 w-4" aria-hidden />
         {t.shareNative}
@@ -58,7 +58,7 @@ export function ShareButtons({ locale }: { locale: Locale }) {
       >
         {copied ? (
           <>
-            <Check className="h-4 w-4 text-emerald-600" aria-hidden />
+            <Check className="h-4 w-4 text-[var(--brand)]" aria-hidden />
             {t.shareCopied}
           </>
         ) : (

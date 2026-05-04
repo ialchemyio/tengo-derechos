@@ -50,7 +50,7 @@ export function LawyersView({ locale }: { locale: Locale }) {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline"
+                className="mt-2 inline-block text-sm font-semibold text-[var(--brand-deep)] hover:underline"
               >
                 {t.visit} →
               </Link>

@@ -69,7 +69,7 @@ export function OfflineView({ locale }: { locale: Locale }) {
       <div className="mt-6 flex gap-3">
         <Link
           href={p("/")}
-          className="rounded-2xl bg-emerald-600 px-5 py-3 text-base font-bold text-white"
+          className="rounded-2xl bg-[var(--brand)] px-5 py-3 text-base font-bold text-white"
         >
           {tryAgain}
         </Link>

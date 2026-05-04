@@ -73,7 +73,7 @@ export async function ResourcesPageView({
           </div>
           <Link
             href={submitHref}
-            className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-deep)]"
           >
             <Plus className="h-4 w-4" aria-hidden />
             {t.submitResource}
@@ -101,7 +101,7 @@ export async function ResourcesPageView({
                 ...stripUndefined(sp),
                 after: nextCursor,
               }).toString()}`}
-              className="font-semibold text-emerald-700 hover:underline"
+              className="font-semibold text-[var(--brand-deep)] hover:underline"
             >
               {locale === "es" ? "Ver más →" : "Load more →"}
             </Link>

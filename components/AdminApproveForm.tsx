@@ -71,14 +71,14 @@ export function AdminApproveForm({
         <button
           type="submit"
           disabled={pending}
-          className="rounded-xl bg-emerald-700 px-3 py-1.5 text-sm font-bold text-white hover:bg-emerald-800 disabled:opacity-70"
+          className="rounded-xl bg-[var(--brand-deep)] px-3 py-1.5 text-sm font-bold text-white hover:bg-[var(--brand-deep)] disabled:opacity-70"
         >
           {pending ? "Saving…" : "Mark reviewed"}
         </button>
         {state.message ? (
           <span
             className={`text-xs ${
-              state.ok ? "text-emerald-700" : "text-red-700"
+              state.ok ? "text-[var(--brand-deep)]" : "text-red-700"
             }`}
           >
             {state.ok ? "Saved." : state.message}

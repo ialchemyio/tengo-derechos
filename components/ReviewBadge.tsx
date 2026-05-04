@@ -11,7 +11,7 @@ export function ReviewBadge({
   const t = dict[locale];
   if (reviewed) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+      <span className="inline-flex items-center gap-1 rounded-full bg-[var(--brand-soft)] px-2 py-0.5 text-[11px] font-semibold text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/25">
         <ShieldCheck className="h-3 w-3" aria-hidden />
         {t.verified}
       </span>

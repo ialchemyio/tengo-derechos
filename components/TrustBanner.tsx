@@ -17,10 +17,10 @@ export function TrustBanner({
   const reviewed = !!review?.reviewed;
   const reviewer = review?.reviewerId ? getReviewer(review.reviewerId) : null;
   const tone = reviewed
-    ? "border-emerald-200 bg-emerald-50 text-emerald-950"
+    ? "border-[var(--brand)]/25 bg-[var(--brand-soft)] text-[var(--brand-deep)]"
     : "border-amber-200 bg-amber-50 text-amber-950";
   const Icon = reviewed ? ShieldCheck : AlertTriangle;
-  const iconTone = reviewed ? "text-emerald-700" : "text-amber-600";
+  const iconTone = reviewed ? "text-[var(--brand-deep)]" : "text-amber-600";
 
   return (
     <aside role="note" className={`rounded-2xl border p-4 ${tone}`}>

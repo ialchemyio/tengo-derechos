@@ -112,7 +112,7 @@ export function OfflineStatus() {
       {swReady && !savedDismissed ? (
         <div
           role="status"
-          className="pointer-events-auto fixed bottom-3 left-1/2 z-40 flex max-w-[92vw] -translate-x-1/2 items-center gap-2 rounded-full bg-emerald-700 px-4 py-2 text-xs font-semibold text-white shadow-lg"
+          className="pointer-events-auto fixed bottom-3 left-1/2 z-40 flex max-w-[92vw] -translate-x-1/2 items-center gap-2 rounded-full bg-[var(--brand-deep)] px-4 py-2 text-xs font-semibold text-white shadow-lg"
         >
           <ShieldCheck className="h-4 w-4" aria-hidden />
           <span>{STRINGS.saved[locale]}</span>
@@ -120,7 +120,7 @@ export function OfflineStatus() {
             type="button"
             onClick={dismissSaved}
             aria-label={STRINGS.dismiss[locale]}
-            className="ml-1 rounded-full bg-emerald-900/40 px-2 py-0.5 text-[10px] font-semibold hover:bg-emerald-900/60"
+            className="ml-1 rounded-full bg-[var(--brand-deep)]/40 px-2 py-0.5 text-[10px] font-semibold hover:bg-[var(--brand-deep)]/60"
           >
             ×
           </button>
@@ -131,7 +131,7 @@ export function OfflineStatus() {
         <button
           type="button"
           onClick={triggerInstall}
-          className="fixed bottom-3 right-3 z-40 inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-emerald-700"
+          className="fixed bottom-3 right-3 z-40 inline-flex items-center gap-1.5 rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[var(--brand-deep)]"
         >
           <Download className="h-4 w-4" aria-hidden />
           {STRINGS.install[locale]}

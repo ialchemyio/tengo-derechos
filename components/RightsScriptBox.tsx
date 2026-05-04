@@ -17,9 +17,9 @@ export function RightsScriptBox({
   locale?: Locale;
 }) {
   return (
-    <div className="rounded-2xl border-l-4 border-emerald-500 bg-emerald-50 p-4">
+    <div className="rounded-2xl border-l-4 border-[var(--brand)] bg-[var(--brand-soft)] p-4">
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-2 text-sm font-semibold text-emerald-900">
+        <div className="flex items-center gap-2 text-sm font-semibold text-[var(--brand-deep)]">
           <Quote className="h-4 w-4" aria-hidden />
           {title}
         </div>
@@ -33,7 +33,7 @@ export function RightsScriptBox({
           />
         ) : null}
       </div>
-      <p className="mt-2 text-base font-medium text-emerald-950">“{phrase}”</p>
+      <p className="mt-2 text-base font-medium text-[var(--brand-deep)]">“{phrase}”</p>
     </div>
   );
 }

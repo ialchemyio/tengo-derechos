@@ -94,7 +94,7 @@ export default async function Page() {
                 </span>
                 <span className="flex items-center gap-1.5 text-xs">
                   {r.published ? (
-                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-semibold text-emerald-800">
+                    <span className="rounded-full bg-[var(--brand-soft)] px-2 py-0.5 font-semibold text-[var(--brand-deep)]">
                       published
                     </span>
                   ) : (
@@ -103,7 +103,7 @@ export default async function Page() {
                     </span>
                   )}
                   {r.verifiedAt ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-semibold text-emerald-800 ring-1 ring-emerald-200">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[var(--brand-soft)] px-2 py-0.5 font-semibold text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/25">
                       <ShieldCheck className="h-3 w-3" aria-hidden /> verified
                     </span>
                   ) : null}
@@ -190,7 +190,7 @@ export default async function Page() {
                 <div className="flex flex-wrap gap-2 sm:col-span-2">
                   <button
                     type="submit"
-                    className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700"
+                    className="rounded-xl bg-[var(--brand)] px-4 py-2 text-sm font-bold text-white hover:bg-[var(--brand-deep)]"
                   >
                     Save
                   </button>
@@ -206,7 +206,7 @@ export default async function Page() {
                 />
                 <button
                   type="submit"
-                  className="rounded-xl bg-emerald-700 px-3 py-1 text-sm font-bold text-white hover:bg-emerald-800"
+                  className="rounded-xl bg-[var(--brand-deep)] px-3 py-1 text-sm font-bold text-white hover:bg-[var(--brand-deep)]"
                 >
                   Mark verified + publish
                 </button>

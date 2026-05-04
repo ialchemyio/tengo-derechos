@@ -7,21 +7,21 @@
   --foreground: #131613;
   --muted: #5f5b54;
 
-  /* Brand */
-  --brand: #057a55;          /* emerald — primary action / trust */
-  --brand-deep: #035c3f;
-  --brand-soft: #d6f0e3;
+  /* Brand — warm clay / terracotta. Primary CTA + trust accent. */
+  --brand: #b4571f;
+  --brand-deep: #8a3d11;
+  --brand-soft: #fbe6d2;
 
-  /* Complementary cool — slate-blue/indigo for legal/trust gravitas */
-  --accent: #2b3a55;         /* deep ink */
-  --accent-soft: #e1e7f3;
+  /* Cool accent — deeper navy / midnight ink for civic gravitas. */
+  --accent: #1f2c44;
+  --accent-soft: #dde2ec;
 
-  /* Warm gold — used only for the "verified" state */
-  --gold: #b88a2a;
-  --gold-soft: #fbeac3;
+  /* Verified gold — slightly deeper to read against cream. */
+  --gold: #a87826;
+  --gold-soft: #f6e3b3;
 
-  /* Emergency */
-  --danger: #b9341d;         /* warm-red, slightly muted from raw red-600 */
+  /* Emergency — warm red unchanged. */
+  --danger: #b9341d;
   --danger-deep: #8a1f12;
   --danger-soft: #fde2dc;
 
@@ -84,8 +84,8 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(43, 58, 85, 0.05), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, rgba(5, 122, 85, 0.06), transparent 60%);
+    radial-gradient(1200px 600px at 80% -10%, rgba(31, 44, 68, 0.06), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(180, 87, 31, 0.06), transparent 60%);
 }
 
 @media print {

@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter, Fraunces } from "next/font/google";
-import { baseMetadata, orgJsonLd } from "@/lib/seo";
+import { baseMetadata, orgJsonLd, websiteJsonLd } from "@/lib/seo";
 import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
 import { OfflineStatus } from "@/components/OfflineStatus";
 
@@ -28,7 +28,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#fdfaf3",
+  themeColor: "#fbf7ef",
   width: "device-width",
   initialScale: 1,
 };
@@ -48,6 +48,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body className="flex min-h-full flex-col">

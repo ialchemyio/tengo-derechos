@@ -201,7 +201,7 @@ export function HomeView({ locale }: { locale: Locale }) {
           >
             <div className="relative">
               <div className="font-display text-xl font-bold">{t.donate}</div>
-              <div className="mt-1 text-sm text-emerald-50">
+              <div className="mt-1 text-sm text-white/85">
                 {locale === "es"
                   ? "Apoya a las familias en momentos difíciles"
                   : "Support families in crisis"}

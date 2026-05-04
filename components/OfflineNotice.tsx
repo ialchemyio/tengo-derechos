@@ -14,7 +14,7 @@ export function OfflineNotice({ locale }: { locale: Locale }) {
         <p>{t.offlineNotice}</p>
         <Link
           href={href}
-          className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline"
+          className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-[var(--brand-deep)] hover:underline"
         >
           {learnMore}
           <ArrowRight className="h-3 w-3" aria-hidden />

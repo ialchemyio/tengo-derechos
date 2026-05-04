@@ -20,7 +20,7 @@ export function ResourceCard({
           <h3 className="text-base font-semibold text-zinc-900">
             {resource.name}
           </h3>
-          <p className="text-xs uppercase tracking-wide text-emerald-700">
+          <p className="text-xs uppercase tracking-wide text-[var(--brand-deep)]">
             {categoryLabels[resource.category][locale]}
           </p>
         </div>
@@ -31,7 +31,7 @@ export function ResourceCard({
             </span>
           ) : null}
           {isVerified ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+            <span className="inline-flex items-center gap-1 rounded-full bg-[var(--brand-soft)] px-2 py-0.5 text-[11px] font-semibold text-[var(--brand-deep)] ring-1 ring-[var(--brand)]/25">
               <ShieldCheck className="h-3 w-3" aria-hidden />
               {t.verifiedBadge}
             </span>
@@ -62,7 +62,7 @@ export function ResourceCard({
             <Phone className="h-4 w-4 text-zinc-500" aria-hidden />
             <a
               href={`tel:${resource.phone.replace(/[^\d+]/g, "")}`}
-              className="font-medium text-emerald-700 underline-offset-2 hover:underline"
+              className="font-medium text-[var(--brand-deep)] underline-offset-2 hover:underline"
             >
               {resource.phone}
             </a>
@@ -75,7 +75,7 @@ export function ResourceCard({
               href={resource.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-emerald-700 underline-offset-2 hover:underline"
+              className="font-medium text-[var(--brand-deep)] underline-offset-2 hover:underline"
             >
               {new URL(resource.website).hostname.replace(/^www\./, "")}
             </a>
@@ -92,7 +92,7 @@ export function ResourceCard({
             {l}
           </span>
         ))}
-        <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-800">
+        <span className="rounded-full bg-[var(--brand-soft)] px-2 py-0.5 text-[var(--brand-deep)]">
           {resource.cost}
         </span>
       </div>

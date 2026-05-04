@@ -12,8 +12,8 @@ export function ThankYouView({ locale }: { locale: Locale }) {
     <>
       <SiteHeader locale={locale} />
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
-        <div className="rounded-2xl bg-emerald-50 p-6 ring-1 ring-emerald-200">
-          <Heart className="h-10 w-10 text-emerald-700" aria-hidden />
+        <div className="rounded-2xl bg-[var(--brand-soft)] p-6 ring-1 ring-[var(--brand)]/25">
+          <Heart className="h-10 w-10 text-[var(--brand-deep)]" aria-hidden />
           <h1 className="mt-2 text-3xl font-extrabold text-zinc-900 sm:text-4xl">
             {t.thankyouTitle}
           </h1>
@@ -34,7 +34,7 @@ export function ThankYouView({ locale }: { locale: Locale }) {
 
           <Link
             href={home}
-            className="mt-6 inline-block text-sm font-semibold text-emerald-700 hover:underline"
+            className="mt-6 inline-block text-sm font-semibold text-[var(--brand-deep)] hover:underline"
           >
             ← {t.home}
           </Link>

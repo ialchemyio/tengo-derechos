@@ -59,7 +59,7 @@ export function TransparencyView({ locale }: { locale: Locale }) {
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
             {[
-              ["programs", labels.programs, placeholders.expensePct.programs, "bg-emerald-500"],
+              ["programs", labels.programs, placeholders.expensePct.programs, "bg-[var(--brand)]"],
               ["ops", labels.ops, placeholders.expensePct.ops, "bg-amber-500"],
               ["fundraising", labels.fundraising, placeholders.expensePct.fundraising, "bg-zinc-400"],
             ].map(([key, label, pct, bar]) => (

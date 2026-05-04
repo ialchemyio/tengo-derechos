@@ -69,7 +69,7 @@ export function EmergencyHubView({ locale }: { locale: Locale }) {
         <p className="mt-6 text-sm">
           <Link
             href={home}
-            className="font-semibold text-emerald-700 hover:underline"
+            className="font-semibold text-[var(--brand-deep)] hover:underline"
           >
             ← {t.backHome}
           </Link>

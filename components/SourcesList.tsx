@@ -36,7 +36,7 @@ export function SourcesList({
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-medium text-emerald-700 hover:underline"
+              className="inline-flex items-center gap-1.5 font-medium text-[var(--brand-deep)] hover:underline"
             >
               {s.label}
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />

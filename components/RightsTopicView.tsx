@@ -7,6 +7,7 @@ import { ReviewBadge } from "./ReviewBadge";
 import { dict, type Locale } from "@/lib/i18n";
 import type { RightsTopic } from "@/lib/rights";
 import { getEffectiveReview } from "@/lib/attestations";
+import { articleJsonLd, breadcrumbJsonLd, siteUrl } from "@/lib/seo";
 
 export async function RightsTopicView({
   topic,
@@ -17,15 +18,36 @@ export async function RightsTopicView({
 }) {
   const t = dict[locale];
   const rightsHref = locale === "es" ? "/es/rights" : "/rights";
+  const pageUrl = `${siteUrl}${rightsHref}/${topic.slug}`;
   const review = await getEffectiveReview(topic.slug, topic);
+  const article = articleJsonLd(topic, locale, pageUrl);
+  const breadcrumbs = breadcrumbJsonLd([
+    {
+      name: locale === "es" ? "Inicio" : "Home",
+      url: siteUrl + (locale === "es" ? "/es" : "/"),
+    },
+    {
+      name: locale === "es" ? "Conoce tus derechos" : "Know Your Rights",
+      url: siteUrl + rightsHref,
+    },
+    { name: topic.title[locale], url: pageUrl },
+  ]);
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <SiteHeader locale={locale} />
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-6">
         <p className="text-sm">
           <Link
             href={rightsHref}
-            className="font-semibold text-emerald-700 hover:underline"
+            className="font-semibold text-[var(--brand-deep)] hover:underline"
           >
             ← {t.backRights}
           </Link>

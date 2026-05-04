@@ -16,9 +16,9 @@ export function ScenarioCard({
   return (
     <Link
       href={href}
-      className="group flex items-start gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-200 transition hover:ring-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+      className="group flex items-start gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-200 transition hover:ring-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
     >
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--brand-soft)] text-[var(--brand-deep)]">
         <Icon className="h-6 w-6" aria-hidden />
       </div>
       <div className="flex-1">

@@ -8,11 +8,11 @@ const toneClasses: Record<Tone, string> = {
   red: "bg-gradient-to-br from-[#fdecea] via-white to-[#fbe7e2] text-[var(--danger-deep)] ring-[var(--danger)]/15 hover:ring-[var(--danger)]/45",
   amber:
     "bg-gradient-to-br from-[#fbeed0] via-white to-[#f7e7c0] text-[#7a5314] ring-[var(--gold)]/20 hover:ring-[var(--gold)]/55",
-  teal: "bg-gradient-to-br from-[#dff3ee] via-white to-[#cfe9e1] text-[#175a4f] ring-emerald-300/40 hover:ring-emerald-500/50",
+  teal: "bg-gradient-to-br from-[#e8eef7] via-white to-[#d1dbef] text-[var(--accent)] ring-[var(--accent)]/20 hover:ring-[var(--accent)]/55",
   indigo:
     "bg-gradient-to-br from-[#dde4f3] via-white to-[#c9d3ea] text-[var(--accent)] ring-[var(--accent)]/20 hover:ring-[var(--accent)]/55",
   emerald:
-    "bg-gradient-to-br from-[var(--brand-soft)] via-white to-[#c2e6d4] text-[var(--brand-deep)] ring-[var(--brand)]/25 hover:ring-[var(--brand)]/55",
+    "bg-gradient-to-br from-[var(--brand-soft)] via-white to-[#f3d6b5] text-[var(--brand-deep)] ring-[var(--brand)]/25 hover:ring-[var(--brand)]/55",
   neutral:
     "bg-gradient-to-br from-[#f0ece1] via-white to-[#e6dfd0] text-zinc-800 ring-[var(--hairline)] hover:ring-zinc-400",
 };
@@ -20,7 +20,7 @@ const toneClasses: Record<Tone, string> = {
 const iconBgFor: Record<Tone, string> = {
   red: "bg-[var(--danger)] text-white",
   amber: "bg-[var(--gold)] text-white",
-  teal: "bg-emerald-700 text-white",
+  teal: "bg-[var(--accent)] text-white",
   indigo: "bg-[var(--accent)] text-white",
   emerald: "bg-[var(--brand)] text-white",
   neutral: "bg-zinc-700 text-white",

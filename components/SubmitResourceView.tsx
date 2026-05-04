@@ -49,7 +49,7 @@ export function SubmitResourceView({ locale }: { locale: Locale }) {
         ) : null}
 
         {state.ok ? (
-          <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">
+          <div className="mt-6 rounded-2xl border border-[var(--brand)]/25 bg-[var(--brand-soft)] p-4 text-[var(--brand-deep)]">
             <p className="font-semibold">{t.submitSent}</p>
           </div>
         ) : null}
@@ -129,7 +129,7 @@ export function SubmitResourceView({ locale }: { locale: Locale }) {
           <button
             type="submit"
             disabled={pending || !online}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-70"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--brand)] px-4 py-3 text-base font-bold text-white shadow-sm hover:bg-[var(--brand-deep)] disabled:opacity-70"
           >
             {pending ? (
               <>

@@ -38,7 +38,7 @@ export function DonateView({ locale }: { locale: Locale }) {
           <p className="mt-4 text-sm">
             <Link
               href={transparencyHref}
-              className="font-semibold text-emerald-700 hover:underline"
+              className="font-semibold text-[var(--brand-deep)] hover:underline"
             >
               {t.transparencyTitle} →
             </Link>
