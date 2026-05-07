@@ -5,8 +5,42 @@ import { dict, type Locale } from "@/lib/i18n";
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = dict[locale];
   const p = (path: string) => (locale === "es" ? `/es${path}` : path);
+  const home = locale === "es" ? "/es" : "/";
   return (
-    <footer className="mt-16 border-t border-[var(--hairline)] bg-[var(--accent)] text-[#dde4f3]">
+    <>
+      {/* Brand outro — large centered lockup just above the navy footer.
+          Cream background + Fraunces wordmark + bilingual tagline.
+          Acts as a closing-page-mark for every public route. */}
+      <section
+        aria-label="Tengo Derechos"
+        className="mt-16 border-t border-[var(--hairline)] bg-[var(--background)]"
+      >
+        <Link
+          href={home}
+          className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-4 py-14 sm:flex-row sm:items-center sm:justify-center sm:gap-7 sm:py-16"
+        >
+          <div className="relative">
+            <BrandMark size={120} className="drop-shadow-sm" />
+            <div
+              aria-hidden
+              className="absolute inset-x-4 -bottom-2 h-3 rounded-full bg-[var(--accent)]/10 blur-md"
+            />
+          </div>
+          <div className="text-center sm:text-left">
+            <p className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[var(--accent)] sm:text-5xl">
+              Tengo<br className="hidden sm:inline" />{" "}
+              <span className="sm:block">Derechos</span>
+            </p>
+            <p className="mt-3 text-base text-[#3a4866] sm:text-lg">
+              Tus derechos. Tu familia.
+              <br />
+              Tu protección.
+            </p>
+          </div>
+        </Link>
+      </section>
+
+      <footer className="border-t border-[var(--hairline)] bg-[var(--accent)] text-[#dde4f3]">
       <div className="mx-auto max-w-5xl px-4 py-10">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div>
@@ -83,6 +117,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </a>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
