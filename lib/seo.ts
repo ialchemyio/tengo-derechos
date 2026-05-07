@@ -3,8 +3,12 @@ import type { Locale } from "./i18n";
 import type { EmergencyGuide } from "./content";
 import type { RightsTopic } from "./rights";
 
+// Use `||` (not `??`) so an empty-string env var falls through to the
+// canonical default. Docker `ARG NEXT_PUBLIC_SITE_URL` without a `--build-arg`
+// produces an empty string, which is truthy through `??` and would cause
+// `new URL("")` to throw inside baseMetadata.metadataBase at build time.
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tengoderechos.org";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://tengoderechos.org";
 export const orgName = "Tengo Derechos";
 export const orgEmail = "hello@tengoderechos.org";
 

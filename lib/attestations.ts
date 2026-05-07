@@ -39,7 +39,7 @@ export type AttestationsFile = {
 
 const PATH = resolve(
   process.cwd(),
-  process.env.ATTESTATIONS_PATH ?? "data/content-attestations.json"
+  process.env.ATTESTATIONS_PATH || "data/content-attestations.json"
 );
 
 const empty: AttestationsFile = { versions: {}, attestations: {}, history: [] };

@@ -31,8 +31,10 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ARG NEXT_PUBLIC_BUILD_ID
-ARG NEXT_PUBLIC_SITE_URL
+# Safe defaults so a missing --build-arg never produces an empty-string env
+# var (which would break `new URL(siteUrl)` at module evaluation in Next 16).
+ARG NEXT_PUBLIC_BUILD_ID=local
+ARG NEXT_PUBLIC_SITE_URL=https://tengoderechos.org
 ARG NEXT_PUBLIC_NONPROFIT_STATUS=pending
 ENV NEXT_PUBLIC_BUILD_ID=$NEXT_PUBLIC_BUILD_ID \
     NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \

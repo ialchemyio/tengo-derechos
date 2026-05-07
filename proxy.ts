@@ -13,7 +13,7 @@ export const config = {
   ],
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isEmbed = path.startsWith("/embed/") || path.startsWith("/es/embed/");
   // The /embed and /es/embed index pages are NOT frameable themselves —
