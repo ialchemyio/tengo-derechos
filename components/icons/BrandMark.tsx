@@ -1,21 +1,74 @@
-// Tengo Derechos brand shield. Reuse everywhere we used to drop a generic
-// lucide Shield. Keep it as inline SVG so it tree-shakes to bytes and can
-// inherit text color via CSS variables when needed.
+// Tengo Derechos brand shield. Inline SVG → tree-shakes to bytes, sizes via
+// the size prop, recolors via the variant. Single source of truth shared
+// with public/icons/icon.svg + scripts/generate-icons.mjs.
+
+type Variant = "full" | "red" | "mono" | "white";
 
 type Props = {
   size?: number;
   className?: string;
-  /** 'full' = navy + clay + cream details. 'red' = emergency variant.
-   *  'mono' = single-color outline (uses currentColor). */
-  variant?: "full" | "red" | "mono" | "white";
+  variant?: Variant;
   title?: string;
 };
 
-const COLORS = {
-  full: { shield: "#1f2c44", inner: "#b4571f", paper: "#fbf7ef", figure: "#fbf7ef", arc: "#b4571f" },
-  red: { shield: "#8a1f12", inner: "#b9341d", paper: "#fbf7ef", figure: "#fbf7ef", arc: "#b9341d" },
-  mono: { shield: "currentColor", inner: "currentColor", paper: "transparent", figure: "currentColor", arc: "currentColor" },
-  white: { shield: "#ffffff", inner: "#ffffff", paper: "#1f2c44", figure: "#1f2c44", arc: "#ffffff" },
+const COLORS: Record<
+  Variant,
+  {
+    shield: string;
+    inner: string;
+    innerShadow: string;
+    paper: string;
+    paperFold: string;
+    figure: string;
+    figureChild: string;
+    arc: string;
+    line: string;
+  }
+> = {
+  full: {
+    shield: "#1f2c44",
+    inner: "#b4571f",
+    innerShadow: "#9a4a17",
+    paper: "#fbf7ef",
+    paperFold: "#e9e1d3",
+    figure: "#fbf7ef",
+    figureChild: "#1f2c44",
+    arc: "#b4571f",
+    line: "#1f2c44",
+  },
+  red: {
+    shield: "#8a1f12",
+    inner: "#b9341d",
+    innerShadow: "#8a261a",
+    paper: "#fbf7ef",
+    paperFold: "#f0d8d2",
+    figure: "#fbf7ef",
+    figureChild: "#8a1f12",
+    arc: "#b9341d",
+    line: "#8a1f12",
+  },
+  mono: {
+    shield: "currentColor",
+    inner: "currentColor",
+    innerShadow: "currentColor",
+    paper: "transparent",
+    paperFold: "transparent",
+    figure: "currentColor",
+    figureChild: "transparent",
+    arc: "currentColor",
+    line: "currentColor",
+  },
+  white: {
+    shield: "#ffffff",
+    inner: "#ffffff",
+    innerShadow: "#e5e7ec",
+    paper: "#1f2c44",
+    paperFold: "#3a4866",
+    figure: "#1f2c44",
+    figureChild: "#ffffff",
+    arc: "#ffffff",
+    line: "#1f2c44",
+  },
 };
 
 export function BrandMark({
@@ -30,91 +83,112 @@ export function BrandMark({
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
-      height={size}
-      viewBox="0 0 200 220"
+      height={size * (240 / 220)}
+      viewBox="0 0 220 240"
       role="img"
       aria-label={title}
       className={className}
     >
       <title>{title}</title>
-      {/* Outer shield */}
+
+      {/* Shield outer */}
       <path
-        d="M100 6
-           L18 30
-           L18 110
-           C18 158 56 196 100 214
-           C144 196 182 158 182 110
-           L182 30 Z"
+        d="M110 10
+           C76 10 44 18 22 30
+           L22 116
+           C22 168 60 208 110 228
+           C160 208 198 168 198 116
+           L198 30
+           C176 18 144 10 110 10 Z"
         fill={c.shield}
         stroke={isMono ? "currentColor" : "none"}
         strokeWidth={isMono ? 8 : 0}
       />
-      {/* Inner clay shield */}
+
+      {/* Inner clay shield + tonal split (right side warmer/darker) */}
       <path
-        d="M100 26
-           L40 44
-           L40 108
-           C40 146 68 178 100 192
-           C132 178 160 146 160 108
-           L160 44 Z"
+        d="M110 28
+           C82 28 56 35 38 45
+           L38 114
+           C38 156 68 188 110 204
+           C152 188 182 156 182 114
+           L182 45
+           C164 35 138 28 110 28 Z"
         fill={c.inner}
         opacity={isMono ? 0.18 : 1}
       />
+      {!isMono ? (
+        <path
+          d="M110 28
+             C138 28 164 35 182 45
+             L182 114
+             C182 156 152 188 110 204
+             L110 28 Z"
+          fill={c.innerShadow}
+          opacity="0.55"
+        />
+      ) : null}
 
-      {/* Document (top-right) with lines */}
-      <g transform="translate(108 50) rotate(8)">
-        <rect width="42" height="52" rx="4" fill={c.paper} stroke={isMono ? "currentColor" : "none"} strokeWidth={isMono ? 3 : 0} />
-        <rect x="6" y="10" width="22" height="3" rx="1.5" fill={c.shield} />
-        <rect x="6" y="18" width="30" height="3" rx="1.5" fill={c.shield} />
-        <rect x="6" y="26" width="22" height="3" rx="1.5" fill={c.shield} />
-        <rect x="6" y="34" width="26" height="3" rx="1.5" fill={c.shield} />
+      {/* Document with folded corner */}
+      <g transform="translate(108 50) rotate(6)">
+        <path
+          d="M0 0 H36 L48 12 V58 H0 Z"
+          fill={c.paper}
+          stroke={isMono ? "currentColor" : "none"}
+          strokeWidth={isMono ? 3 : 0}
+        />
+        <path d="M36 0 L48 12 H38 C36 12 36 10 36 8 Z" fill={c.paperFold} />
+        <rect x="6" y="20" width="22" height="3" rx="1.5" fill={c.line} />
+        <rect x="6" y="28" width="32" height="3" rx="1.5" fill={c.line} />
+        <rect x="6" y="36" width="22" height="3" rx="1.5" fill={c.line} />
+        <rect x="6" y="44" width="28" height="3" rx="1.5" fill={c.line} />
       </g>
 
-      {/* Signal arcs above the document — broadcast / reach */}
+      {/* Three-arc signal */}
       <g
-        transform="translate(150 38)"
+        transform="translate(154 32) rotate(-8)"
         fill="none"
         stroke={c.arc}
-        strokeWidth="6"
+        strokeWidth={6}
         strokeLinecap="round"
       >
-        <path d="M0 14 A14 14 0 0 1 14 0" />
-        <path d="M0 26 A26 26 0 0 1 26 0" opacity="0.55" />
+        <path d="M0 12 A12 12 0 0 1 12 0" />
+        <path d="M0 22 A22 22 0 0 1 22 0" opacity="0.7" />
+        <path d="M0 32 A32 32 0 0 1 32 0" opacity="0.4" />
       </g>
 
-      {/* Parent + child — abstract: large head/body cradling a smaller one */}
-      <g transform="translate(56 76)">
-        {/* Parent head */}
-        <circle cx="38" cy="14" r="14" fill={c.figure} />
-        {/* Parent body cradling */}
+      {/* Parent figure */}
+      <g transform="translate(50 80)" fill={c.figure}>
+        <circle cx="38" cy="14" r="14" />
         <path
-          d="M10 80
-             C10 50 24 34 38 34
-             C50 34 64 44 64 60
-             L64 96
-             C64 110 50 116 38 116
-             C26 116 10 110 10 96 Z"
-          fill={c.figure}
-        />
-        {/* Child head */}
-        <circle cx="46" cy="58" r="9" fill={c.shield} opacity={isMono ? 0 : 0.9} />
-        {/* Child body */}
-        <path
-          d="M30 70
-             C30 64 36 60 44 60
-             C54 60 60 66 60 76
-             L60 92
-             C60 100 54 102 46 102
-             C36 102 30 100 30 92 Z"
-          fill={c.shield}
-          opacity={isMono ? 0 : 0.9}
+          d="M14 86
+             C14 56 26 32 42 32
+             C56 32 70 42 70 60
+             L70 102
+             C70 116 56 122 42 122
+             C26 122 14 116 14 102 Z"
         />
       </g>
+
+      {/* Child overlay */}
+      {!isMono ? (
+        <g transform="translate(50 80)" fill={c.figureChild} opacity="0.92">
+          <circle cx="50" cy="60" r="9" />
+          <path
+            d="M34 72
+               C34 66 40 62 48 62
+               C58 62 64 68 64 78
+               L64 96
+               C64 104 58 106 50 106
+               C40 106 34 104 34 96 Z"
+          />
+        </g>
+      ) : null}
     </svg>
   );
 }
 
-/** Horizontal lockup: mark + wordmark. Used in SiteHeader / PressView. */
+/** Horizontal lockup: mark + Fraunces wordmark, optional tagline. */
 export function BrandLockup({
   height = 36,
   className,
@@ -123,29 +197,40 @@ export function BrandLockup({
 }: {
   height?: number;
   className?: string;
-  variant?: "full" | "red" | "mono" | "white";
+  variant?: Variant;
   showTagline?: boolean;
 }) {
   const wordColor =
     variant === "white" || variant === "mono" ? "currentColor" : "#1f2c44";
   const tagColor =
     variant === "white" || variant === "mono" ? "currentColor" : "#3a4866";
+  const markHeight = height;
+  const markWidth = height * (220 / 240);
   return (
     <span
       className={`inline-flex items-center gap-3 ${className ?? ""}`}
-      style={{ height }}
+      style={{ height: markHeight }}
     >
-      <BrandMark size={height} variant={variant} />
-      <span className="flex flex-col leading-tight">
+      <span
+        className="block shrink-0"
+        style={{ width: markWidth, height: markHeight }}
+      >
+        <BrandMark size={markWidth} variant={variant} />
+      </span>
+      <span className="flex flex-col leading-[0.95]">
         <span
           className="font-display font-extrabold tracking-tight"
-          style={{ color: wordColor, fontSize: height * 0.58 }}
+          style={{ color: wordColor, fontSize: height * 0.62 }}
         >
           Tengo Derechos
         </span>
         {showTagline ? (
           <span
-            style={{ color: tagColor, fontSize: height * 0.28 }}
+            style={{
+              color: tagColor,
+              fontSize: height * 0.26,
+              marginTop: height * 0.08,
+            }}
             className="opacity-80"
           >
             Tus derechos. Tu familia. Tu protección.

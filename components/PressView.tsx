@@ -142,12 +142,26 @@ export function PressView({ locale }: { locale: Locale }) {
       sections={c.sections}
       cta={[
         {
-          label: locale === "es" ? "Descargar logo (SVG)" : "Download logo (SVG)",
+          label: locale === "es" ? "Logo SVG" : "Logo SVG",
           href: "/icons/icon.svg",
         },
         {
-          label: locale === "es" ? "Logo PNG 512" : "Logo PNG 512",
+          label:
+            locale === "es"
+              ? "PNG 512 (transparente)"
+              : "PNG 512 (transparent)",
           href: "/icons/icon-512.png",
+        },
+        {
+          label:
+            locale === "es"
+              ? "PNG 1024 (transparente)"
+              : "PNG 1024 (transparent)",
+          href: "/icons/icon-1024-transparent.png",
+        },
+        {
+          label: "App icon (iOS)",
+          href: "/icons/apple-touch-icon.png",
         },
       ]}
     >
