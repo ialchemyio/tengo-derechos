@@ -77,4 +77,39 @@ await emit("apple-touch-icon.png", 180, 22, { background: "navy-rounded" });
 // Press-kit hi-res transparent for partner orgs.
 await emit("icon-1024-transparent.png", 1024, 0);
 
+// ---------- Favicon set for app/ (Next's metadata-icons convention) ----------
+//
+// Next.js auto-generates the <link rel="icon"> tags for files placed at the
+// root of the app directory: app/favicon.ico, app/icon.{svg,png}, and
+// app/apple-icon.png. We render those here from the same canonical source so
+// the favicon stays one byte stream away from the rest of the brand assets.
+
+const appDir = resolve(root, "app");
+
+// Modern browsers prefer the SVG.
+const srcSvg = await readFile(resolve(out, "icon.svg"), "utf8");
+await writeFile(resolve(appDir, "icon.svg"), srcSvg, "utf8");
+console.log(`wrote ${resolve(appDir, "icon.svg")} (${srcSvg.length} bytes)`);
+
+// Apple touch icon. iOS rejects transparency, so reuse the rounded-navy
+// variant we already built for /public/icons/apple-touch-icon.png.
+const appleBuf = await compose(180, 22, { background: "navy-rounded" });
+await writeFile(resolve(appDir, "apple-icon.png"), appleBuf);
+console.log(
+  `wrote ${resolve(appDir, "apple-icon.png")} (${appleBuf.length} bytes, navy-rounded bg)`
+);
+
+// Legacy favicon.ico — multi-resolution. Generate three transparent PNGs at
+// 16, 32, 48 and pack them into one .ico via to-ico.
+const toIco = (await import("to-ico")).default;
+const sizes = [16, 32, 48];
+const pngBuffers = await Promise.all(
+  sizes.map((s) => compose(s, Math.max(0, Math.round(s * 0.05))))
+);
+const icoBuf = await toIco(pngBuffers);
+await writeFile(resolve(appDir, "favicon.ico"), icoBuf);
+console.log(
+  `wrote ${resolve(appDir, "favicon.ico")} (${icoBuf.length} bytes, ${sizes.join("+")})`
+);
+
 console.log("done");
