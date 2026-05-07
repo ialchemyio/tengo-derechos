@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield } from "lucide-react";
+import { BrandMark } from "./icons/BrandMark";
 import { dict, type Locale } from "@/lib/i18n";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
@@ -10,9 +10,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="mx-auto max-w-5xl px-4 py-10">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2 text-white">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/20">
-                <Shield className="h-5 w-5" aria-hidden />
+            <div className="flex items-center gap-2.5 text-white">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/15">
+                <BrandMark size={36} variant="full" />
               </span>
               <span className="font-display text-lg font-bold">
                 Tengo Derechos

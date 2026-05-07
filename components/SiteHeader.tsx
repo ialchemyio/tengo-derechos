@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Shield, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { LanguageToggle } from "./LanguageToggle";
+import { BrandMark } from "./icons/BrandMark";
 import { dict, type Locale } from "@/lib/i18n";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -12,12 +13,14 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
         <Link
           href={home}
-          className="group flex items-center gap-2 font-semibold text-zinc-900"
+          className="group flex items-center gap-2.5 font-semibold text-zinc-900"
         >
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--brand)] text-white shadow-sm ring-1 ring-[var(--brand-deep)]/30 transition group-hover:scale-105">
-            <Shield className="h-5 w-5" aria-hidden />
-          </span>
-          <span className="font-display text-base font-bold tracking-tight sm:text-lg">
+          <BrandMark
+            size={36}
+            className="transition group-hover:scale-105"
+            title="Tengo Derechos"
+          />
+          <span className="font-display text-base font-bold tracking-tight text-[var(--accent)] sm:text-lg">
             Tengo Derechos
           </span>
         </Link>

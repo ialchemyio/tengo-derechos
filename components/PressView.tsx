@@ -1,4 +1,5 @@
 import { DocPageView, type DocSection } from "./DocPageView";
+import { BrandShowcase } from "./BrandShowcase";
 import type { Locale } from "@/lib/i18n";
 
 const COPY: Record<
@@ -149,6 +150,8 @@ export function PressView({ locale }: { locale: Locale }) {
           href: "/icons/icon-512.png",
         },
       ]}
-    />
+    >
+      <BrandShowcase locale={locale} />
+    </DocPageView>
   );
 }

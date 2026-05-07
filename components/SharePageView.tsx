@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Shield, ArrowRight, AlertTriangle } from "lucide-react";
+import { ArrowRight, AlertTriangle } from "lucide-react";
+import { BrandMark } from "./icons/BrandMark";
 import type { Locale } from "@/lib/i18n";
 import { fullGuideUrlFor, shareUrlFor, type StepContent } from "@/lib/share";
 import { ShareWhatsAppButton } from "./ShareWhatsAppButton";
@@ -47,9 +48,7 @@ export function SharePageView({
           href={home}
           className="inline-flex items-center gap-2 font-semibold text-[var(--accent)]"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--brand)] text-white">
-            <Shield className="h-4 w-4" aria-hidden />
-          </span>
+          <BrandMark size={28} />
           Tengo Derechos
         </Link>
         <span className="rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-xs font-semibold text-[var(--accent)]">

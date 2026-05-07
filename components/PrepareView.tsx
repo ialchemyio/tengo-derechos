@@ -9,7 +9,6 @@ import {
   Trash2,
   Copy,
   Check,
-  Shield,
   AlertTriangle,
   Users,
   Baby,
@@ -20,6 +19,7 @@ import {
 } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { QuickExitButton } from "./QuickExitButton";
+import { BrandMark } from "./icons/BrandMark";
 
 type PlanData = {
   contactName: string;
@@ -362,8 +362,8 @@ export function PrepareView({ locale }: { locale: Locale }) {
 
       <header className="bg-[var(--accent)] text-white no-print">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/20">
-            <Shield className="h-5 w-5" aria-hidden />
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/15">
+            <BrandMark size={36} />
           </span>
           <div className="flex-1">
             <p className="font-display text-lg font-bold">Tengo Derechos</p>

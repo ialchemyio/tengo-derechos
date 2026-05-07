@@ -1,52 +1,50 @@
-// One-shot icon generator. Run: node scripts/generate-icons.mjs
-// Produces /public/icons/icon-{192,512,512-maskable}.png and apple-touch-icon.png
+// One-shot icon generator. Run: npm run icons
+// Renders the Tengo Derechos brand mark to:
+//   /public/icons/icon-{192,512,512-maskable}.png + apple-touch-icon.png
 import sharp from "sharp";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const out = resolve(__dirname, "..", "public", "icons");
+const root = resolve(__dirname, "..");
+const out = resolve(root, "public", "icons");
 
-const EMERALD = "#059669";
-const CREAM = "#fdfaf3";
+const CREAM = "#fbf7ef";
+const NAVY = "#1f2c44";
 
-const shieldSvg = (size, padding) => {
-  const inner = size - padding * 2;
-  const fontSize = Math.round(inner * 0.42);
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-    <rect width="${size}" height="${size}" fill="${EMERALD}"/>
-    <g transform="translate(${padding} ${padding})">
-      <path d="M ${inner / 2} ${inner * 0.08}
-               L ${inner * 0.12} ${inner * 0.22}
-               L ${inner * 0.12} ${inner * 0.55}
-               C ${inner * 0.12} ${inner * 0.78}, ${inner * 0.32} ${inner * 0.92}, ${inner / 2} ${inner * 0.96}
-               C ${inner * 0.68} ${inner * 0.92}, ${inner * 0.88} ${inner * 0.78}, ${inner * 0.88} ${inner * 0.55}
-               L ${inner * 0.88} ${inner * 0.22} Z"
-            fill="${CREAM}" stroke="${CREAM}" stroke-width="0"/>
-      <text x="${inner / 2}" y="${inner * 0.62}" text-anchor="middle"
-            font-family="Helvetica, Arial, sans-serif" font-weight="900"
-            font-size="${fontSize}" fill="${EMERALD}">TD</text>
-    </g>
+// Read the canonical SVG and embed it inside a square cream backdrop with
+// the requested padding. Used for app/Apple touch icons.
+async function compose(canvasSize, padding, opts = {}) {
+  const innerSize = canvasSize - padding * 2;
+  const markSvg = await readFile(resolve(out, "icon.svg"), "utf8");
+  // Pull the inner contents of <svg ...>...</svg>
+  const inner = markSvg
+    .replace(/^[\s\S]*?<svg[^>]*>/, "")
+    .replace(/<\/svg>\s*$/, "");
+  const bg = opts.darkBg ? NAVY : CREAM;
+  const composed = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvasSize}" height="${canvasSize}" viewBox="0 0 ${canvasSize} ${canvasSize}">
+    <rect width="${canvasSize}" height="${canvasSize}" fill="${bg}" rx="${opts.rounded ? canvasSize * 0.18 : 0}"/>
+    <svg x="${padding}" y="${padding}" width="${innerSize}" height="${innerSize}" viewBox="0 0 200 220" preserveAspectRatio="xMidYMid meet">
+      ${inner}
+    </svg>
   </svg>`;
-};
+  return sharp(Buffer.from(composed)).png().toBuffer();
+}
 
-async function emit(name, size, padding) {
-  const svg = shieldSvg(size, padding);
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+async function emit(name, canvasSize, padding, opts = {}) {
+  const png = await compose(canvasSize, padding, opts);
   const path = resolve(out, name);
   await writeFile(path, png);
   console.log(`wrote ${path} (${png.length} bytes)`);
 }
 
 await mkdir(out, { recursive: true });
-await emit("icon-192.png", 192, 8);
-await emit("icon-512.png", 512, 22);
+// Standard PWA icons: cream background, generous padding so the mark breathes.
+await emit("icon-192.png", 192, 14);
+await emit("icon-512.png", 512, 36);
+// Maskable: SAFE zone is the inner ~80%, so add 80px of padding on a 512.
 await emit("icon-512-maskable.png", 512, 80);
-await emit("apple-touch-icon.png", 180, 8);
-await writeFile(
-  resolve(out, "icon.svg"),
-  shieldSvg(512, 22),
-  "utf8"
-);
-console.log("wrote icon.svg");
+// Apple touch icon: rounded-square on dark navy bg, white-mark feel.
+await emit("apple-touch-icon.png", 180, 18, { rounded: true });
+console.log("done");

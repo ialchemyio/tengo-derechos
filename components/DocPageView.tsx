@@ -16,6 +16,7 @@ export function DocPageView({
   sections,
   meta,
   cta,
+  children,
 }: {
   locale: Locale;
   title: string;
@@ -23,6 +24,7 @@ export function DocPageView({
   sections: DocSection[];
   meta?: { label: string; value: string }[];
   cta?: { label: string; href: string }[];
+  children?: React.ReactNode;
 }) {
   const t = dict[locale];
   const home = locale === "es" ? "/es" : "/";
@@ -98,6 +100,8 @@ export function DocPageView({
             </section>
           ))}
         </div>
+
+        {children ? <div className="mt-8">{children}</div> : null}
 
         {cta && cta.length > 0 ? (
           <div className="mt-10 flex flex-wrap gap-2">
