@@ -25,7 +25,7 @@ const aiCrawlers = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/admin", "/weather", "/api/", "/donate/thank-you", "/donate/cancelled", "/es/donate/thank-you", "/es/donate/cancelled"];
+  const disallow = ["/admin", "/api/", "/donate/thank-you", "/donate/cancelled", "/es/donate/thank-you", "/es/donate/cancelled"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },

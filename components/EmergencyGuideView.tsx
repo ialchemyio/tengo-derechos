@@ -56,7 +56,10 @@ export async function EmergencyGuideView({
             backgroundSize: "22px 22px",
           }}
         />
-        <div className="relative mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+        {/* Right edge of this row stays clear so the fixed Quick Exit
+            button (top-4 right-4 z-50) doesn't overlap the language
+            toggle. Both controls live on the LEFT here. */}
+        <div className="relative mx-auto flex max-w-5xl flex-wrap items-center gap-2 px-4 py-3 pr-32 sm:pr-36">
           <Link
             href={emergencyHref}
             className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white/90 ring-1 ring-white/20 hover:bg-white/15 hover:text-white"
@@ -64,9 +67,7 @@ export async function EmergencyGuideView({
             <ArrowLeft className="h-4 w-4" aria-hidden />
             {t.backEmergency}
           </Link>
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-          </div>
+          <LanguageToggle />
         </div>
         <div className="relative mx-auto max-w-5xl px-4 pb-7">
           <div className="flex items-start gap-3">

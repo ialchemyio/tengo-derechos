@@ -3,13 +3,24 @@
 import { LogOut } from "lucide-react";
 import { useCallback } from "react";
 
+// Quick Exit redirects to Google instead of a local /weather page so the
+// browser URL bar shows zero trace of tengoderechos.org. Standard pattern
+// from ACLU, RAINN, Planned Parenthood. We replace history so the back
+// button cannot return to whatever rights guide the user was reading.
+const EXIT_DESTINATION = "https://www.google.com/";
+
 export function QuickExitButton({ label = "Quick Exit" }: { label?: string }) {
   const exit = useCallback(() => {
     try {
-      window.history.replaceState(null, "", "/weather");
-      window.location.replace("/weather");
+      // Replace current history entry, then trigger a fresh navigation.
+      window.history.replaceState(null, "", EXIT_DESTINATION);
     } catch {
-      window.location.href = "/weather";
+      // ignore — replace() below still does the right thing.
+    }
+    try {
+      window.location.replace(EXIT_DESTINATION);
+    } catch {
+      window.location.href = EXIT_DESTINATION;
     }
   }, []);
   return (

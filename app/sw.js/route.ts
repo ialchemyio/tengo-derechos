@@ -7,7 +7,6 @@ export const dynamic = "force-static";
 const PRECACHE_ROUTES = [
   "/",
   "/es",
-  "/weather",
   "/offline",
   "/es/offline",
   "/disclaimer",
@@ -62,7 +61,6 @@ const CACHE_FIRST_PREFIXES = [
   "/audio/",
   "/_next/static/",
   "/manifest.json",
-  "/weather",
 ];
 
 const NETWORK_FIRST_PREFIXES = [
