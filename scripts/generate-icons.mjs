@@ -18,6 +18,9 @@ const NAVY = "#1f2c44";
 async function compose(canvasSize, padding, opts = {}) {
   const innerSize = canvasSize - padding * 2;
   const markSvg = await readFile(resolve(out, "icon.svg"), "utf8");
+  // Read the source viewBox so the inner <svg> wrapper preserves coordinates.
+  const vbMatch = markSvg.match(/viewBox=["']([^"']+)["']/i);
+  const sourceViewBox = vbMatch ? vbMatch[1] : "0 0 220 240";
   const inner = markSvg
     .replace(/^[\s\S]*?<svg[^>]*>/, "")
     .replace(/<\/svg>\s*$/, "");
@@ -35,7 +38,7 @@ async function compose(canvasSize, padding, opts = {}) {
         ? `<rect width="${canvasSize}" height="${canvasSize}" rx="${bgRadius}" fill="${bgFill}"/>`
         : ""
     }
-    <svg x="${padding}" y="${padding}" width="${innerSize}" height="${innerSize}" viewBox="0 0 220 240" preserveAspectRatio="xMidYMid meet">
+    <svg x="${padding}" y="${padding}" width="${innerSize}" height="${innerSize}" viewBox="${sourceViewBox}" preserveAspectRatio="xMidYMid meet">
       ${inner}
     </svg>
   </svg>`;
