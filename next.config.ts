@@ -18,6 +18,13 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // HSTS at the Next layer too (belt-and-suspenders with proxy.ts)
+          // so static assets and edge routes that skip middleware still tell
+          // browsers to lock this origin to HTTPS for 2 years.
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
         ],
       },
       {
