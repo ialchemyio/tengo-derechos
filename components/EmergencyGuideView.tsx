@@ -5,7 +5,7 @@ import { dict } from "@/lib/i18n";
 import type { EmergencyGuide } from "@/lib/content";
 import { pick } from "@/lib/content";
 import { getEffectiveReview } from "@/lib/attestations";
-import { howToJsonLd, breadcrumbJsonLd, siteUrl } from "@/lib/seo";
+import { howToJsonLd, breadcrumbJsonLd, speakableJsonLd, siteUrl } from "@/lib/seo";
 import { StepFlow } from "./StepFlow";
 import { TrustBanner } from "./TrustBanner";
 import { SourcesList } from "./SourcesList";
@@ -29,6 +29,7 @@ export async function EmergencyGuideView({
   const resourcesHref = locale === "es" ? "/es/resources" : "/resources";
   const pageUrl = `${siteUrl}${emergencyHref}/${guide.slug}`;
   const howTo = howToJsonLd(guide, locale);
+  const speakable = speakableJsonLd(pageUrl, locale);
   const breadcrumbs = breadcrumbJsonLd([
     { name: locale === "es" ? "Inicio" : "Home", url: siteUrl + (locale === "es" ? "/es" : "/") },
     { name: locale === "es" ? "Emergencia" : "Emergency", url: siteUrl + emergencyHref },
@@ -44,6 +45,10 @@ export async function EmergencyGuideView({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakable) }}
       />
       <QuickExitButton label={t.quickExit} />
       <div className="relative overflow-hidden bg-gradient-to-br from-[var(--danger-deep)] via-[var(--danger)] to-[#7d1a0e] text-white">

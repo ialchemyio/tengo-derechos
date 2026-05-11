@@ -68,6 +68,20 @@ export const baseMetadata: Metadata = {
     canonical: "/",
     languages: { en: "/", es: "/es" },
   },
+  // Search-engine ownership verification. Codes come from env so Coolify
+  // can paste them in without a redeploy of code. Each is optional and the
+  // tag is only emitted when the env var is set.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: {
+      ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+        : {}),
+      ...(process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION
+        ? { "yandex-verification": process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION }
+        : {}),
+    },
+  },
 };
 
 export function pageMetadata({
@@ -164,6 +178,24 @@ export function howToJsonLd(guide: EmergencyGuide, locale: Locale) {
         .filter(Boolean)
         .join(" "),
     })),
+  };
+}
+
+// Speakable: tells voice assistants (Google Assistant, Alexa-via-Bixby, etc.)
+// which parts of the page are safe to read aloud verbatim. Critical for our
+// audience — people whose hands may be occupied, who may be driving, or who
+// rely on screen readers and voice UIs during an actual emergency.
+// CSS selectors point at the headline + step commands inside our views.
+export function speakableJsonLd(url: string, locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url,
+    inLanguage: locale === "es" ? "es" : "en",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "[data-speakable]"],
+    },
   };
 }
 

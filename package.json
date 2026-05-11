@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "icons": "node scripts/generate-icons.mjs",
     "audio": "node scripts/generate-audio.mjs",
-    "resources:export": "node scripts/export-resources.mjs"
+    "resources:export": "node scripts/export-resources.mjs",
+    "indexnow": "node scripts/indexnow-ping.mjs",
+    "postbuild": "node scripts/indexnow-ping.mjs || true"
   },
   "dependencies": {
     "@stripe/stripe-js": "^9.4.0",

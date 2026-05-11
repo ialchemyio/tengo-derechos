@@ -27,10 +27,13 @@ export function StepFlow({
               {i + 1}
             </div>
             <div className="flex-1">
-              <div className="text-lg font-bold text-zinc-900">
+              <div
+                data-speakable
+                className="text-lg font-bold text-zinc-900"
+              >
                 {pick(locale, step.command)}
               </div>
-              <p className="mt-1 text-base text-zinc-700">
+              <p data-speakable className="mt-1 text-base text-zinc-700">
                 {pick(locale, step.detail)}
               </p>
 
