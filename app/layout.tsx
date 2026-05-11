@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import { baseMetadata, orgJsonLd, websiteJsonLd } from "@/lib/seo";
 import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
 import { OfflineStatus } from "@/components/OfflineStatus";
@@ -9,7 +9,11 @@ const inter = Inter({
   variable: "--font-sans",
   display: "swap",
 });
-const fraunces = Fraunces({
+// Newsreader: a modern news-grade serif designed for civic/editorial reading.
+// Clean unadorned letterforms (no swashy `f` like Fraunces had), strong
+// presence at 700/800, reads as authoritative and trustworthy. Used by
+// civic-info publishers like The Markup. Pairs cleanly with Inter body.
+const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
@@ -39,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${inter.variable} ${newsreader.variable} h-full antialiased`}
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
